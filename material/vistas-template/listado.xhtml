@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/templates/template-general.xhtml">
+<ui:define name="titulo">
+    #{msgs.tituloOperacionListado}
+</ui:define>
+
+<ui:define name="cuerpo">
+<h:form>
+<h:dataTable var="valumno" 
+             value="#{controller.alumnos}"
+             border="1">
+  <h:column><f:facet name="header">#{msgs.tablaNombre}</f:facet>#{valumno.nombre}</h:column>
+  <h:column><f:facet name="header">#{msgs.tablaApellidos}</f:facet>#{valumno.apellidos}</h:column>
+  <h:column><f:facet name="header">#{msgs.tablaIdUser}</f:facet>#{valumno.iduser}</h:column>
+  <h:column><f:facet name="header">#{msgs.tablaCorreo}</f:facet>#{valumno.email}</h:column>
+  <h:column><f:facet name="header">#{msgs.tablaBaja}</f:facet>
+  <h:commandLink action="#{controller.baja(valumno)}" type="submit" value="#{msgs.enlaceBaja}" immediate="true">
+     <f:ajax execute="@this" render="@form"/>
+  </h:commandLink>
+  </h:column>
+  <h:column><f:facet name="header">#{msgs.tablaEditar}</f:facet>
+  <h:commandLink action="editar" type="submit" value="#{msgs.enlaceEditar}" actionListener="#{alumno.setAlumno(valumno)}" immediate="true">
+  </h:commandLink>
+
+  </h:column>
+</h:dataTable>
+<ul>
+   <li>
+   <h:commandLink value="#{msgs.enlaceIdiomaES}" actionListener="#{settings.setSpanish}">
+     <f:ajax render="@form"/>
+  </h:commandLink>
+   </li>
+   <li>
+   <h:commandLink value="#{msgs.enlaceIdiomaEN}" actionListener="#{settings.setEnglish}">
+     <f:ajax render="@form"/>
+   </h:commandLink>
+   </li>
+   <li><h:commandLink action="casa" value="#{msgs.enlaceCasa}"/> </li>
+</ul>                  
+</h:form>
+</ui:define>
+</ui:composition>

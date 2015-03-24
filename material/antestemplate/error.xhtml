@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<f:view locale="#{settings.locale}">      
+<h:head>
+<title>#{msgs.tituloHead}</title> 
+</h:head>
+<h:body>
+<h:form>
+<center>
+<h1>#{msgs.tituloAplicacion1}</h1>
+<br/>
+<h2>#{msgs.tituloAplicacion2}</h2>
+</center>
+<h1>#{msgs.mensajeError1}</h1>
+<p>#{msgs.mensajeError2}</p>
+<p>#{msgs.mensajeError3}</p>
+#{msgs.textoIdioma}
+<ul>
+				<li><h:commandLink value="#{msgs.enlaceIdiomaES}"
+						actionListener="#{settings.setSpanish}">
+						<f:ajax render="@form" />
+					</h:commandLink></li>
+				<li><h:commandLink value="#{msgs.enlaceIdiomaEN}"
+						actionListener="#{settings.setEnglish}">
+						<f:ajax render="@form" />
+					</h:commandLink></li>
+			</ul>
+</h:form>  
+</h:body>
+</f:view>
+</html>
