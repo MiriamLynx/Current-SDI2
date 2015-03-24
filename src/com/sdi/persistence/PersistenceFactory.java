@@ -1,6 +1,6 @@
 package com.sdi.persistence;
 
-import com.sdi.persistence.AlumnosDao;
+import com.sdi.persistence.UsuarioDao;
 
 /**
  * Interfaz de la factoria que suministra implementaciones reales de la fachada 
@@ -12,7 +12,10 @@ import com.sdi.persistence.AlumnosDao;
  */
 public interface PersistenceFactory {
 	
-	AlumnosDao createAlumnoDao();
+	UsuarioDao createUsuarioDao();
+	CorreoDao createCorreoDao();
+	ContactoDao createContactoDao();
+	DestinatarioDao createDestinatarioDao();
 	
 	// ... otros m��todos factoria para Daos de otras entidades del modelo ...
 }
