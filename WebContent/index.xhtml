@@ -1,26 +1,30 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    template="/templates/template-general.xhtml">
-<ui:define name="titulo">
-    #{msgs.tituloOpciones}
-</ui:define>
-
-<ui:define name="cuerpo">
-<h:form id="form-principal">
-  <h:commandLink value="#{msgs.enlaceListado}" action="#{controller.listado}"/> 
-  <br/>
-  <h:commandLink value="#{msgs.enlaceAlta}" action="alta" actionListener="#{alumno.iniciaAlumno}"/>
-</h:form>
-</ui:define>
-
-<ui:define name="pie">
-     <ui:include src="/snippets/pie-idiomas.xhtml"/>
-</ui:define>
-
-<ui:define name="pie2">
-     Hola
-</ui:define>
-
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/template-general.xhtml">
+	<ui:define name="cuerpo">
+		<div class="container-head" align="center">
+			<h1 class="">#{msgs.welcome}</h1>
+			<a href="login.jsp" class="btn btn-primary btn-md">#{msgs.signin}</a>
+			<a href="register.jsp" class="btn btn-primary btn-md">#{msgs.signup}</a>
+		</div>
+		<div class="container-features" align="center">
+			<div class="container-image">
+				<img src="img/computer.png" class="img-responsive" />
+				<h3 class="">#{msgs.tipone}</h3>
+				<h5 class="">#{msgs.subtipone}</h5>
+			</div>
+			<div class="container-image">
+				<img src="img/reading.png" class="img-responsive" />
+				<h3 class="">#{msgs.tiptwo}</h3>
+				<h5 class="">#{msgs.subtiptwo}</h5>
+			</div>
+			<div class="container-image">
+				<img src="img/swag.png" class="img-responsive" />
+				<h3 class="">#{msgs.tipthree}</h3>
+				<h5 class="">#{msgs.subtipthree}</h5>
+			</div>
+		</div>
+	</ui:define>
 </ui:composition>

@@ -10,23 +10,6 @@
 		</resource-bundle>
 	</application>
 
-	<managed-bean>
-		<managed-bean-name>controller</managed-bean-name>
-		<managed-bean-class>com.sdi.presentation.BeanAlumnos</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>settings</managed-bean-name>
-		<managed-bean-class>com.sdi.presentation.BeanSettings</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-
-    <managed-bean>
-		<managed-bean-name>alumno</managed-bean-name>
-		<managed-bean-class>com.sdi.presentation.BeanAlumno</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -37,48 +20,8 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>casa</from-outcome>
+			<from-outcome>home</from-outcome>
 			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/index.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{controller.listado}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/altaForm.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/listado.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{controller.baja(valumno)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>editar</from-outcome>
-			<to-view-id>/editForm.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/altaForm.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{controller.salva}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/editForm.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{controller.salva}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>

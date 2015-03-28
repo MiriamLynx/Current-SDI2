@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14260228949500" configfile="/Notaneitorv2_0_MISOLUCION/WebContent/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14260228949500" configfile="/sdi2-1/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="572" id="pf14275376530460" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14275376530461 pf14275376530462" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="error.xhtml" x="338" y="380" id="pf14275376530463" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14275376530461" path="/error.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="764" id="pf14275376530464" referenceLink="//@navigationRule.2/@fromViewId|" inlinks="pf14275376530462" path="/index.xhtml"/>
+  <links id="pf14275376530461" target="pf14275376530463" source="pf14275376530460" outcome="error"/>
+  <links id="pf14275376530462" target="pf14275376530464" source="pf14275376530460" outcome="home"/>
+</pageflow:Pageflow>

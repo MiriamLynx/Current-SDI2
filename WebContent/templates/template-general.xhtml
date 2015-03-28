@@ -1,38 +1,60 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-<!-- Si que si quisiera tomar el idioma del navegador -->      
-<!-- <f:view locale="#{facesContext.externalContext.requestLocale}">  -->
-<!-- Para tomar el idioma del bean de configuración beanSettings  -->
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <f:view locale="#{settings.locale}">
-<h:head>
-<title>#{msgs.tituloHead}</title> 
-</h:head>
-<h:body>
-<h:form id="form-cabecera">   
-<center>
-<h1>#{msgs.tituloAplicacion1}</h1>
-<br/>
-<br/>
-<h2>#{msgs.tituloAplicacion2}</h2>
-</center>
-<br/>
-<br/>
-<table border="5" align="center">
-<tr>
- <th class="title">
-   <ui:insert name="titulo">#{msgs.tituloDefectoCabecera}</ui:insert>  
-</th>
-</tr></table>
-</h:form> 
-
-<ui:insert name="cuerpo">#{msgs.tituloDefectoCuerpo}</ui:insert>
-
-<ui:insert name="pie">#{msgs.tituloPie}</ui:insert>
-
-</h:body>
+	<h:head>
+		<title>#{msgs.title}</title>
+	</h:head>
+	<h:body>
+		<div class="container">
+			<ui:insert name="navbar">
+				<div class="navbar navbar-default navbar-static"
+					style="opacity: 0.9;">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#">#{msgs.title}</a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="welcome.jsp" class="">#{msgs.home}</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown">#{msgs.language}<b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<h:form>
+									<li><h:commandLink value="#{msgs.enlaceIdiomaES}"
+											actionListener="#{settings.setSpanish}">
+											<f:ajax render="@all" />
+										</h:commandLink></li>
+									<li><h:commandLink value="#{msgs.enlaceIdiomaEN}"
+											actionListener="#{settings.setEnglish}">
+											<f:ajax render="@all" />
+										</h:commandLink></li>
+								</h:form>
+							</ul></li>
+					</ul>
+				</div>
+			</ui:insert>
+			<ui:insert name="cuerpo">Contenido por defecto para el cuerpo</ui:insert>
+			<ui:insert name="pie">
+				<br />
+				<br />
+				<center>--- @Lynxmail - LynxProds. ---</center>
+			</ui:insert>
+			<ui:insert name="includes">
+				<!-- Bootstrap CSS -->
+				<link href="lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"
+					rel="stylesheet" />
+				<!-- Custom CSS -->
+				<link href="css/welcome.css" rel="stylesheet" />
+				<!-- BOOTSTRAP CORE JS -->
+				<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+				<script src="js/jquery-1.11.1.min.js"></script>
+				<!-- Include all compiled plugins (below), or include individual files as needed -->
+				<script src="lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+			</ui:insert>
+		</div>
+	</h:body>
 </f:view>
 </html>
