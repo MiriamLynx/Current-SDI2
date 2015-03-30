@@ -63,7 +63,7 @@ public class LoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
-		if (session.getAttribute("LOGGEDIN_USER") == null) {
+		if (session.getAttribute("USER") == null) {
 			String loginForm = config.getInitParameter("LoginParam");
 			// Si no hay login, redirección al formulario de login
 			res.sendRedirect(req.getContextPath() + loginForm);

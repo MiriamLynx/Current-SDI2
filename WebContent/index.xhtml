@@ -6,16 +6,17 @@
 	<ui:define name="cuerpo">
 		<div class="container-head" align="center">
 			<h1 class="">#{msgs.welcome}</h1>
-
-
-
-
-
-			<h:form>
-				<h:commandLink value="#{msgs.signin}" class="btn btn-primary btn-md"
-					data-toggle="modal" data-target="#loginModal" />
-				<h:commandLink value="#{msgs.signup}" class="btn btn-primary btn-md" />
-			</h:form>
+			<button class="btn btn-primary btn-md" data-toggle="modal"
+				data-target="#loginModal">#{msgs.signin}</button>
+			<h:button value="#{msgs.signup}" class="btn btn-primary btn-md" />
+		</div>
+		<div class="container-head" align="center">
+			<h:outputLabel style="color:red;" value="#{msgs.deactivated}"
+				rendered="#{user.deactivated}" />
+			<h:outputLabel style="color:red;" value="#{msgs.wrongPassword}"
+				rendered="#{user.wrongPassword}" />
+			<h:outputLabel style="color:red;" value="#{msgs.notFound}"
+				rendered="#{user.notFound}" />
 		</div>
 		<div class="container-features" align="center">
 			<div class="container-image">

@@ -5,32 +5,35 @@
 	<!-- Login Modal -->
 	<div class="modal fade" id="loginModal" tabindex="-1"
 		style="opacity: 0.9;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<h:form class="form-login" action="send" method="post">
-					<div class="modal-header">
-						<h:commandButton type="button" class="close" data-dismiss="modal" />
-						<h4 class="modal-title" id="myModalLabel">#{msgs.signin}</h4>
-					</div>
-					<div class="modal-body">
-						<h:form>
-							<h:inputText type="text" required="true"
-								requiredMessage="#{msgs.required}" name="username" id="username"
-								class="form-control input-sm chat-input" placeholder="username" />
-							<br class="" />
-							<h:inputSecret type="password" required="true"
-								requiredMessage="#{msgs.required}" name="password" id="password"
-								class="form-control input-sm chat-input" placeholder="password" />
-							<br class="" />
-							<br class="" />
-							<div class="wrapper">
-								<h:commandButton type="submit" value="#{msgs.submit}"
-									class="btn btn-primary btn-md" />
-							</div>
-						</h:form>
-					</div>
-				</h:form>
-			</div>
+		<div class="card card-container">
+			<h:form class="form-login" action="send" method="post">
+				<div class="modal-header">
+					<h:button type="button" class="close" data-dismiss="modal"
+						value="x" />
+					<h4 class="modal-title" id="myModalLabel">#{msgs.signin}</h4>
+				</div>
+				<div class="modal-body">
+					<h:form>
+						<h:inputText type="text" required="true"
+							requiredMessage="#{msgs.required}" name="username" id="username"
+							class="form-control input-sm chat-input" value="#{user.login}"
+							placeholder="username" />
+						<br class="" />
+						<h:inputSecret type="password" required="true"
+							requiredMessage="#{msgs.required}" name="password" id="password"
+							class="form-control input-sm chat-input" value="#{user.password}"
+							placeholder="password" />
+						<br class="" />
+						<br class="" />
+						<div class="wrapper">
+							<h:commandButton type="submit" value="#{msgs.submit}"
+								class="btn btn-primary btn-md" action="#{user.validate}" />
+						</div>
+					</h:form>
+				</div>
+			</h:form>
 		</div>
 	</div>
+	<!-- Custom CSS -->
+	<link href="css/modal.css" rel="stylesheet" />
 </ui:composition>

@@ -1,5 +1,7 @@
 package com.sdi.business;
 
+import com.sdi.model.Usuario;
+
 /**
  * Este es el interfaz que ofrecer�� cualquier implementaci��n de la clase
  * fachada.
@@ -14,8 +16,8 @@ package com.sdi.business;
  * @author alb
  * 
  */
-public interface UsuariosService {
+public interface UsuarioService {
 
-	void find(String login);
+	Usuario find(String login);
 
 }
