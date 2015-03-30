@@ -6,8 +6,16 @@
 	<ui:define name="cuerpo">
 		<div class="container-head" align="center">
 			<h1 class="">#{msgs.welcome}</h1>
-			<a href="login.jsp" class="btn btn-primary btn-md">#{msgs.signin}</a>
-			<a href="register.jsp" class="btn btn-primary btn-md">#{msgs.signup}</a>
+
+
+
+
+
+			<h:form>
+				<h:commandLink value="#{msgs.signin}" class="btn btn-primary btn-md"
+					data-toggle="modal" data-target="#loginModal" />
+				<h:commandLink value="#{msgs.signup}" class="btn btn-primary btn-md" />
+			</h:form>
 		</div>
 		<div class="container-features" align="center">
 			<div class="container-image">
@@ -26,5 +34,6 @@
 				<h5 class="">#{msgs.subtipthree}</h5>
 			</div>
 		</div>
+		<ui:include src="snippets/loginModal.xhtml" />
 	</ui:define>
 </ui:composition>
