@@ -13,7 +13,6 @@ public class Correo {
 	private int carpeta;
 	private String login_Usuario;
 	private List<Contacto> destinatarios;
-	private String formatedDate;
 
 	public Integer getId() {
 		return id;
@@ -72,11 +71,12 @@ public class Correo {
 	}
 
 	public String getFormatedDate() {
-		return this.formatedDate;
+		return Check.date(getFechahora());
 	}
 
-	public void setFormatedDate() {
-		this.formatedDate = Check.date(getFechahora());
+	@Override
+	public String toString() {
+		return "Correo [asunto=" + asunto + "]";
 	}
 
 }

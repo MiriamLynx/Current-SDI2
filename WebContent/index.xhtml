@@ -2,7 +2,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/templates/template-general.xhtml">
+	template="/templates/template-general.xhtml"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 	<ui:define name="cuerpo">
 		<div class="container-head" align="center">
 			<h1 class="">#{msgs.welcome}</h1>
@@ -12,11 +13,11 @@
 		</div>
 		<div class="container-head" align="center">
 			<h:outputLabel style="color:red;" value="#{msgs.deactivated}"
-				rendered="#{user.deactivated}" />
+				rendered="#{sesion.deactivated}" />
 			<h:outputLabel style="color:red;" value="#{msgs.wrongPassword}"
-				rendered="#{user.wrongPassword}" />
+				rendered="#{sesion.wrongPassword}" />
 			<h:outputLabel style="color:red;" value="#{msgs.notFound}"
-				rendered="#{user.notFound}" />
+				rendered="#{sesion.notFound}" />
 		</div>
 		<div class="container-features" align="center">
 			<div class="container-image">

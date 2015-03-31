@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/template-general.xhtml">
+
+	<ui:define name="option">
+		<li><h:commandLink value="#{msgs.signout}" action="#{sesion.end}" /></li>
+	</ui:define>
+
+	<ui:define name="cuerpo">
+		<div class="container-head">
+			<div class="col-md-2" style="display: inline-block;">
+				<br /> <br />
+				<button class="btn btn-primary btn-md" data-toggle="modal"
+					data-target="#sendModal">#{msgs.compose}</button>
+			</div>
+			<h:form id="title">
+				<div class="col-md-10" style="display: inline-block;">
+					<h1 class="">#{sesion.title}</h1>
+				</div>
+			</h:form>
+		</div>
+		<div class="col-md-2">
+			<div class="wrap">
+				<h:form>
+					<ul class="nav">
+						<li><h:commandLink value="#{msgs.sent}"
+								action="#{sesion.verEnviados}">
+							</h:commandLink></li>
+						<li><h:commandLink value="#{msgs.drafts}"
+								action="#{sesion.verBorradores}">
+							</h:commandLink></li>
+						<li><h:commandLink value="#{msgs.deleted}"
+								action="#{sesion.verEliminados}">
+							</h:commandLink></li>
+						<li><h:commandLink value="#{msgs.contacts}"
+								action="#{sesion.verContactos}">
+							</h:commandLink></li>
+						<li><a href="updateprofile" class="">#{msgs.profile}</a></li>
+					</ul>
+				</h:form>
+			</div>
+		</div>
+		<div class="col-md-10">
+			<div class="wrap" id="mails">
+				<div id="accordion" class="panel-group"
+					style="margin-bottom: 0px; margin-left: 40px; margin-right: 40px; display: inline-block;">
+					<br /> <br />
+					<h:form>
+						<h:inputText type="text" class="form-control search" name="search"
+							id="search" p:placeholder="#{msgs.search}"
+							value="#{sesion.entry}">
+							<f:ajax event="keyup" execute="@this" render="renderMe"
+								listener="#{sesion.refreshContacts}" />
+						</h:inputText>
+					</h:form>
+				</div>
+				<br /> <br />
+				<ul class="list">
+					<h:form id="renderMe">
+						<h:panelGroup id="mailList">
+							<ui:repeat value="#{sesion.user.contactos}" var="entry">
+								<li>
+									<div id="accordion" class="panel-group"
+										style="margin-bottom: 0px; margin-left: 0px; margin-right: 40px;">
+										<div class="panel panel-default" style="opacity: 0.7;">
+											<div class="panel-heading" style="margin: 0px;">
+												<a data-toggle="collapse" data-parent="#accordion"
+													href="#${entry.id}" class="collapsed"> <span
+													class="name" style="min-width: 120px;">${entry.nombre}</span>
+													<span class="surname">${entry.apellidos}</span> <span
+													class="pull-right"> <label>Agenda: </label> <span
+														class="agenda_Usuario">${entry.agenda_Usuario}</span>
+												</span>
+												</a>
+											</div>
+											<div id="${entry.id}" class="panel-collapse collapse"
+												style="height: 0px;">
+												<div class="panel-body">
+													<span class="email">${entry.email}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ui:repeat>
+						</h:panelGroup>
+					</h:form>
+				</ul>
+			</div>
+		</div>
+		<ui:include src="/snippets/sendModal.xhtml" />
+	</ui:define>
+</ui:composition>

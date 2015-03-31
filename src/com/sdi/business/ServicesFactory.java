@@ -4,4 +4,8 @@ public interface ServicesFactory {
 
 	UsuarioService createUsuarioService();
 
+	CorreoService createCorreoService();
+
+	ContactoService createContactoService();
+
 }

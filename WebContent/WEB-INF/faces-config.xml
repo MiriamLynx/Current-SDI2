@@ -17,7 +17,21 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>error</from-outcome>
-			<to-view-id>/restricted/error.xhtml</to-view-id>
+			<to-view-id>/error.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>contacts</from-outcome>
+			<to-view-id>/contacts.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>mail</from-outcome>
+			<to-view-id>/mail.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -31,7 +45,7 @@
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>exit</from-outcome>
-			<to-view-id>/restricted/mail.xhtml</to-view-id>
+			<to-view-id>/mail.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>fail</from-outcome>

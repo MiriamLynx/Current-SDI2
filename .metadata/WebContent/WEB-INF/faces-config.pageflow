@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14260228949500" configfile="/sdi2-1/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="572" id="pf14275376530460" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14275376530462 pf14277254815607" path="*"/>
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="764" id="pf14275376530464" referenceLink="//@navigationRule.2/@navigationCase.1/@toViewId|" outlinks="pf14277254889438 pf142772705448610" inlinks="pf14275376530462 pf142772705448610" path="/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restricted/error.xhtml" id="pf14277244619144" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14277254815607" path="/restricted/error.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="restricted/mail.xhtml" id="pf14277254889439" referenceLink="//@navigationRule.2/@navigationCase.1/@toViewId|" inlinks="pf14277254889438" path="/restricted/mail.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="380" id="pf14275376530460" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14275376530462 pf14278012627960 pf14278234763094" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf14275376530464" referenceLink="//@navigationRule.3/@navigationCase.1/@toViewId|" outlinks="pf142772705448610 pf14278012627971" inlinks="pf14275376530462 pf142772705448610" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="error.xhtml" x="338" y="583" id="pf14278012627972" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14278012627960" path="/error.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="mail.xhtml" x="554" y="380" id="pf14278012627973" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf14278012627971 pf14278234763094" path="/mail.xhtml"/>
   <links id="pf14275376530462" target="pf14275376530464" source="pf14275376530460" outcome="home"/>
-  <links id="pf14277254815607" target="pf14277244619144" source="pf14275376530460" outcome="error"/>
-  <links id="pf14277254889438" target="pf14277254889439" source="pf14275376530464" outcome="exit"/>
-  <links id="pf142772705448610" target="pf14275376530464" source="pf14275376530464" outcome="fail"/>
+  <links id="pf14278012627960" target="pf14278012627972" source="pf14275376530460" outcome="error"/>
+  <links id="pf14278012627971" target="pf14278012627973" source="pf14275376530464" outcome="exit"/>
+  <links id="pf14278234763094" target="pf14278012627973" source="pf14275376530460" outcome="mail"/>
+  <links id="pf142772705448610" target="pf14275376530464" source="pf14275376530464" outcome="fail">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
 </pageflow:Pageflow>

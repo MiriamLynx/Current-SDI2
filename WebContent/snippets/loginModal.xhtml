@@ -1,7 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 	<!-- Login Modal -->
 	<div class="modal fade" id="loginModal" tabindex="-1"
 		style="opacity: 0.9;">
@@ -16,24 +17,22 @@
 					<h:form>
 						<h:inputText type="text" required="true"
 							requiredMessage="#{msgs.required}" name="username" id="username"
-							class="form-control input-sm chat-input" value="#{user.login}"
-							placeholder="username" />
+							class="form-control input-sm chat-input" value="#{sesion.login}"
+							p:placeholder="username" />
 						<br class="" />
 						<h:inputSecret type="password" required="true"
 							requiredMessage="#{msgs.required}" name="password" id="password"
-							class="form-control input-sm chat-input" value="#{user.password}"
-							placeholder="password" />
+							class="form-control input-sm chat-input"
+							value="#{sesion.password}" p:placeholder="password" />
 						<br class="" />
 						<br class="" />
 						<div class="wrapper">
-							<h:commandButton type="submit" value="#{msgs.submit}"
-								class="btn btn-primary btn-md" action="#{user.validate}" />
+							<h:commandButton value="#{msgs.submit}"
+								class="btn btn-primary btn-md" action="#{sesion.validate}" />
 						</div>
 					</h:form>
 				</div>
 			</h:form>
 		</div>
 	</div>
-	<!-- Custom CSS -->
-	<link href="css/modal.css" rel="stylesheet" />
 </ui:composition>

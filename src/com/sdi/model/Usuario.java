@@ -100,6 +100,12 @@ public class Usuario {
 		this.contactos = contactos;
 	}
 
+	public void addContacts(List<Contacto> contactos) {
+		for (Contacto c : contactos) {
+			this.contactos.add(c);
+		}
+	}
+
 	public List<Correo> getBorradores() {
 		List<Correo> borradores = new ArrayList<Correo>();
 		for (Correo c : correos) {
