@@ -39,6 +39,13 @@ public class BeanSesion implements Serializable {
 	private List<Correo> mail;
 	private String current;
 
+	// perfil
+	private String nombre;
+	private String apellidos;
+	private String repeatPassword;
+	private boolean success;
+	private boolean fail;
+
 	// criterio de busqueda
 	private String entry;
 
@@ -48,24 +55,43 @@ public class BeanSesion implements Serializable {
 		Usuario user = us.find(login);
 
 		if (check(user)) {
-			init(user);
-			setSession(user);
-			setEnviados();
-			return "exit";
+			return init(user);
 		} else {
 			return "fail";
 		}
 	}
 
-	private void init(Usuario user) {
+	public void updateProfile() {
+		UsuarioService us = Factories.services.createUsuarioService();
+		success = false;
+		fail = false;
+		if (check(password, repeatPassword)) {
+			us.updateProfile(user, nombre, apellidos, password);
+			success = true;
+		} else {
+			fail = true;
+		}
+		password = null;
+		repeatPassword = null;
+	}
+
+	private String init(Usuario user) {
 		CorreoService cs = Factories.services.createCorreoService();
 		ContactoService cos = Factories.services.createContactoService();
+		setNombre(user.getNombre());
+		setApellidos(user.getApellidos());
+		setSession(user);
+		password = null;
 		if (user.getRol().equals("Administrador")) {
 			user.setContactos(cos.findAdmin());
+			BeanUsuarios.init();
+			return setUsers();
 		} else {
 			user.setCorreos(cs.findByLogin(login));
 			user.setContactos(cos.findByLogin(login));
 			user.addContacts(cos.findAdmin());
+			setEnviados();
+			return "mail";
 		}
 	}
 
@@ -85,6 +111,17 @@ public class BeanSesion implements Serializable {
 		} else {
 			return true;
 		}
+	}
+
+	private boolean check(String password, String repeatPassword) {
+		if ((!password.equals("") && repeatPassword.equals(""))
+				|| (password.equals("") && !repeatPassword.equals(""))) {
+			return false;
+		}
+		if (!password.equals("") && !repeatPassword.equals("")) {
+			return password.equals(repeatPassword);
+		}
+		return true;
 	}
 
 	public void refreshMail() {
@@ -130,6 +167,8 @@ public class BeanSesion implements Serializable {
 				setEliminados();
 			} else if (this.current.equals("contacts")) {
 				setContactos();
+			} else if (this.current.equals("users")) {
+				setUsers();
 			}
 		}
 	}
@@ -265,6 +304,12 @@ public class BeanSesion implements Serializable {
 		current = "contacts";
 	}
 
+	public String setUsers() {
+		this.title = getLocaleString("users");
+		current = "users";
+		return "users";
+	}
+
 	public String verContactos() {
 		this.title = getLocaleString("contacts");
 		current = "contacts";
@@ -345,6 +390,66 @@ public class BeanSesion implements Serializable {
 
 	public void setEntry(String entry) {
 		this.entry = entry;
+	}
+
+	public String getCurrent() {
+		return current;
+	}
+
+	public void setCurrent(String current) {
+		this.current = current;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getRepeatPassword() {
+		return repeatPassword;
+	}
+
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getPage() {
+		if (current.equals("sent") || current.equals("drafts")
+				|| current.equals("deleted")) {
+			return "mail";
+		} else if (current.equals("users")) {
+			return "users";
+		} else if (current.equals("contacts")) {
+			return "contacts";
+		}
+		return "";
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess() {
+		this.success = false;
+	}
+
+	public boolean isFail() {
+		return fail;
+	}
+
+	public void setFail() {
+		this.fail = false;
 	}
 
 }

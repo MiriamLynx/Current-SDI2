@@ -1,5 +1,7 @@
 package com.sdi.business;
 
+import java.util.List;
+
 import com.sdi.model.Usuario;
 
 /**
@@ -19,5 +21,12 @@ import com.sdi.model.Usuario;
 public interface UsuarioService {
 
 	Usuario find(String login);
+
+	void updateProfile(Usuario user, String nombre, String apellidos,
+			String password);
+
+	List<Usuario> getAllActivated();
+
+	List<Usuario> getAllDeactivated();
 
 }

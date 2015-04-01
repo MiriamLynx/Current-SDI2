@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/template-general.xhtml">
+
+	<ui:define name="option">
+		<li><h:commandLink value="#{msgs.signout}" action="#{sesion.end}" /></li>
+	</ui:define>
+
+	<ui:define name="cuerpo">
+		<div class="container-head">
+			<div class="col-md-2" style="display: inline-block;">
+				<br /> <br />
+			</div>
+			<div class="col-md-10" style="display: inline-block;">
+				<h1 class="">#{sesion.title}</h1>
+
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="wrap">
+				<ui:include src="/snippets/adminMenu.xhtml" />
+			</div>
+		</div>
+		<div class="col-md-10">
+			<div class="wrap" id="users">
+				<ul class="list">
+					<h:form id="activated">
+						<h:panelGroup>
+							<h:panelGroup rendered="#{not empty users.activated}">
+								<h4>#{msgs.activated}</h4>
+							</h:panelGroup>
+							<ui:repeat value="#{users.activated}" var="entry">
+								<li>
+									<div id="accordion" class="panel-group"
+										style="margin-bottom: 0px; margin-left: 0px; margin-right: 40px;">
+										<div class="panel panel-default" style="opacity: 0.7;">
+											<div class="panel-heading" style="margin: 0px;">
+												<label class=""> <input type="checkbox"
+													name="toDeactivate" value="${entry.login}" /></label> <a
+													href="profile?user=${entry.login}"> <span class="name"
+													style="min-width: 120px;">${entry.nombre}</span> <span>${entry.apellidos}</span>
+													<span>${entry.email}</span> <span class="pull-right"></span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ui:repeat>
+						</h:panelGroup>
+					</h:form>
+				</ul>
+				<ul class="list">
+					<h:form id="deativated">
+						<h:panelGroup>
+							<h:panelGroup rendered="#{not empty users.deactivated}">
+								<br />
+								<br />
+								<h4>#{msgs.deactivated}</h4>
+							</h:panelGroup>
+							<ui:repeat value="#{users.deactivated}" var="entry">
+								<li>
+									<div id="accordion" class="panel-group"
+										style="margin-bottom: 0px; margin-left: 0px; margin-right: 40px;">
+										<div class="panel panel-default" style="opacity: 0.7;">
+											<div class="panel-heading" style="margin: 0px;">
+												<label class=""> <input type="checkbox"
+													name="toDeactivate" value="${entry.login}" /></label> <a
+													href="profile?user=${entry.login}"> <span class="name"
+													style="min-width: 120px;">${entry.nombre}</span> <span>${entry.apellidos}</span>
+													<span>${entry.email}</span> <span class="pull-right"></span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ui:repeat>
+						</h:panelGroup>
+					</h:form>
+				</ul>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

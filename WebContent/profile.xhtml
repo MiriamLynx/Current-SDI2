@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/template-general.xhtml"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="option">
+		<li><h:commandLink value="#{msgs.signout}" action="#{sesion.end}" /></li>
+	</ui:define>
+
+	<ui:define name="cuerpo">
+		<div class="row">
+			<div class="wrap col-md-offset-4 col-md-4">
+				<h:form>
+					<h4
+						style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px;">#{msgs.changes}</h4>
+					<h:inputText type="text" required="true"
+						style="max-width:250px; margin-left:50px; margin-right:50px;"
+						requiredMessage="#{msgs.required}" name="name"
+						class="form-control input-sm chat-input" value="#{sesion.nombre}" />
+					<br />
+
+					<h:inputText type="text" required="true"
+						style="max-width:250px; margin-left:50px; margin-right:50px;"
+						requiredMessage="#{msgs.required}" name="surname"
+						class="form-control input-sm chat-input"
+						value="#{sesion.apellidos}" />
+					<br />
+					<h:inputText type="text" readonly="true"
+						style="max-width:250px; margin-left:50px; margin-right:50px;"
+						contenteditable="false" name="mail"
+						class="form-control input-sm chat-input"
+						value="#{sesion.user.email}" />
+					<br />
+					<div id="accordion" class="panel-group"
+						style="max-width: 250px; margin-left: 50px; margin-right: 50px;">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="#collapseOne">#{msgs.changePassword}</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse">
+								<div class="panel-body">
+									<h:inputSecret type="password" name="password"
+										class="form-control input-sm chat-input"
+										p:placeholder="password" value="#{sesion.password}" />
+									<br />
+									<h:inputSecret type="password" name="repeatpassword"
+										class="form-control input-sm chat-input"
+										p:placeholder="repeat password"
+										value="#{sesion.repeatPassword}" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div class="wrapper" style="display: inline-block;">
+						<div class="modal-footer"
+							style="margin-left: 50px; margin-right: 50px;">
+							<h:form>
+								<h:commandButton value="#{msgs.submit}"
+									action="#{sesion.updateProfile()}" class="btn btn-primary" />
+								<h:link value="#{msgs.cancel}" class="btn btn-primary"
+									outcome="#{sesion.getPage()}" />
+							</h:form>
+						</div>
+					</div>
+					<h:outputLabel
+						style="color:green;margin-left: 50px; margin-right: 50px;"
+						action="#{sesion.setSuccess()}" value="#{msgs.changed}"
+						rendered="#{sesion.success}" />
+					<h:outputLabel
+						style="color:red;margin-left: 50px; margin-right: 50px;"
+						action="#{sesion.setFail()}" value="#{msgs.passwordMismatch}"
+						rendered="#{sesion.fail}" />
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

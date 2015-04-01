@@ -24,26 +24,7 @@
 		</div>
 		<div class="col-md-2">
 			<div class="wrap">
-				<h:form>
-					<ul class="nav">
-						<li><h:commandLink value="#{msgs.sent}"
-								action="#{sesion.setEnviados}">
-								<f:ajax execute="@this" render="renderMe title" />
-							</h:commandLink></li>
-						<li><h:commandLink value="#{msgs.drafts}"
-								action="#{sesion.setBorradores}">
-								<f:ajax execute="@this" render="renderMe title" />
-							</h:commandLink></li>
-						<li><h:commandLink value="#{msgs.deleted}"
-								action="#{sesion.setEliminados}">
-								<f:ajax execute="@this" render="renderMe title" />
-							</h:commandLink></li>
-						<li><h:commandLink value="#{msgs.contacts}"
-								action="#{sesion.verContactos}">
-							</h:commandLink></li>
-						<li><a href="updateprofile" class="">#{msgs.profile}</a></li>
-					</ul>
-				</h:form>
+				<ui:include src="/snippets/userMenu.xhtml" />
 			</div>
 		</div>
 		<div class="col-md-10">
@@ -64,7 +45,7 @@
 							<f:ajax execute="@this" render="renderMe" />
 						</h:commandButton>
 					</h:form>
-					<br /> <br />
+					<br />
 					<h:form>
 						<h:inputText type="text" class="form-control search" name="search"
 							id="search" p:placeholder="#{msgs.search}"

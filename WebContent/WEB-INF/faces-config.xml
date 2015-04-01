@@ -30,6 +30,20 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
+			<from-outcome>profile</from-outcome>
+			<to-view-id>/profile.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>users</from-outcome>
+			<to-view-id>/users.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
 			<from-outcome>mail</from-outcome>
 			<to-view-id>/mail.xhtml</to-view-id>
 		</navigation-case>
@@ -43,10 +57,6 @@
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/index.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>exit</from-outcome>
-			<to-view-id>/mail.xhtml</to-view-id>
-		</navigation-case>
 		<navigation-case>
 			<from-outcome>fail</from-outcome>
 			<to-view-id>/index.xhtml</to-view-id>

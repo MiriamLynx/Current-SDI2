@@ -13,8 +13,10 @@
 		<div class="container-head">
 			<div class="col-md-2" style="display: inline-block;">
 				<br /> <br />
-				<button class="btn btn-primary btn-md" data-toggle="modal"
-					data-target="#sendModal">#{msgs.compose}</button>
+				<h:panelGroup rendered="#{sesion.user.rol == 'Cliente'}">
+					<button class="btn btn-primary btn-md" data-toggle="modal"
+						data-target="#sendModal">#{msgs.compose}</button>
+				</h:panelGroup>
 			</div>
 			<h:form id="title">
 				<div class="col-md-10" style="display: inline-block;">
@@ -24,30 +26,18 @@
 		</div>
 		<div class="col-md-2">
 			<div class="wrap">
-				<h:form>
-					<ul class="nav">
-						<li><h:commandLink value="#{msgs.sent}"
-								action="#{sesion.verEnviados}">
-							</h:commandLink></li>
-						<li><h:commandLink value="#{msgs.drafts}"
-								action="#{sesion.verBorradores}">
-							</h:commandLink></li>
-						<li><h:commandLink value="#{msgs.deleted}"
-								action="#{sesion.verEliminados}">
-							</h:commandLink></li>
-						<li><h:commandLink value="#{msgs.contacts}"
-								action="#{sesion.verContactos}">
-							</h:commandLink></li>
-						<li><a href="updateprofile" class="">#{msgs.profile}</a></li>
-					</ul>
-				</h:form>
+				<h:panelGroup rendered="#{sesion.user.rol == 'Cliente'}">
+					<ui:include src="/snippets/userMenu.xhtml" />
+				</h:panelGroup>
+				<h:panelGroup rendered="#{sesion.user.rol == 'Administrador'}">
+					<ui:include src="/snippets/adminMenu.xhtml" />
+				</h:panelGroup>
 			</div>
 		</div>
 		<div class="col-md-10">
-			<div class="wrap" id="mails">
+			<div class="wrap" id="contacts">
 				<div id="accordion" class="panel-group"
 					style="margin-bottom: 0px; margin-left: 40px; margin-right: 40px; display: inline-block;">
-					<br /> <br />
 					<h:form>
 						<h:inputText type="text" class="form-control search" name="search"
 							id="search" p:placeholder="#{msgs.search}"
@@ -60,7 +50,7 @@
 				<br /> <br />
 				<ul class="list">
 					<h:form id="renderMe">
-						<h:panelGroup id="mailList">
+						<h:panelGroup id="contactList">
 							<ui:repeat value="#{sesion.user.contactos}" var="entry">
 								<li>
 									<div id="accordion" class="panel-group"
