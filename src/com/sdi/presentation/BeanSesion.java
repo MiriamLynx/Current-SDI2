@@ -37,6 +37,7 @@ public class BeanSesion implements Serializable {
 	// visualizando
 	private String title;
 	private List<Correo> mail;
+	private String current;
 
 	// criterio de busqueda
 	private String entry;
@@ -87,7 +88,7 @@ public class BeanSesion implements Serializable {
 	}
 
 	public void refreshMail() {
-		getAllMail();
+		setPage();
 		List<Correo> filter = new ArrayList<Correo>();
 		for (int i = 0; i < mail.size(); i++) {
 			if (!(mail.get(i).getAsunto().contains(entry))
@@ -119,13 +120,17 @@ public class BeanSesion implements Serializable {
 		}
 	}
 
-	private void getAllMail() {
-		if (this.title.equals(getLocaleString("sent"))) {
-			setEnviados();
-		} else if (this.title.equals(getLocaleString("drafts"))) {
-			setBorradores();
-		} else if (this.title.equals(getLocaleString("deleted"))) {
-			setEliminados();
+	public void setPage() {
+		if (current != null) {
+			if (this.current.equals("sent")) {
+				setEnviados();
+			} else if (this.current.equals("drafts")) {
+				setBorradores();
+			} else if (this.current.equals("deleted")) {
+				setEliminados();
+			} else if (this.current.equals("contacts")) {
+				setContactos();
+			}
 		}
 	}
 
@@ -255,42 +260,54 @@ public class BeanSesion implements Serializable {
 		this.user = user;
 	}
 
+	public void setContactos() {
+		this.title = getLocaleString("contacts");
+		current = "contacts";
+	}
+
 	public String verContactos() {
 		this.title = getLocaleString("contacts");
+		current = "contacts";
 		return "contacts";
+	}
+
+	public void setEnviados() {
+		this.title = getLocaleString("sent");
+		this.current = "sent";
+		this.mail = user.getEnviados();
+	}
+
+	public void setEliminados() {
+		this.title = getLocaleString("deleted");
+		this.current = "deleted";
+		this.mail = user.getEliminados();
+	}
+
+	public void setBorradores() {
+		this.title = getLocaleString("drafts");
+		this.current = "drafts";
+		this.mail = user.getBorradores();
 	}
 
 	public String verEnviados() {
 		this.title = getLocaleString("sent");
+		this.current = "sent";
 		this.mail = user.getEnviados();
 		return "mail";
 	}
 
 	public String verEliminados() {
 		this.title = getLocaleString("deleted");
+		this.current = "deleted";
 		this.mail = user.getEliminados();
 		return "mail";
 	}
 
 	public String verBorradores() {
 		this.title = getLocaleString("drafts");
+		this.current = "drafts";
 		this.mail = user.getBorradores();
 		return "mail";
-	}
-
-	public void setEnviados() {
-		this.title = getLocaleString("sent");
-		this.mail = user.getEnviados();
-	}
-
-	public void setEliminados() {
-		this.title = getLocaleString("deleted");
-		this.mail = user.getEliminados();
-	}
-
-	public void setBorradores() {
-		this.title = getLocaleString("drafts");
-		this.mail = user.getBorradores();
 	}
 
 	public List<Contacto> getContactos() {

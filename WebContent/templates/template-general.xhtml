@@ -21,7 +21,8 @@
 							<li class="active"><h:commandLink value="#{msgs.home}" /></li>
 							<li><h:form>
 									<h:selectOneMenu class="selectpicker"
-										value="#{settings.language}" onchange="submit()">
+										value="#{settings.language}"
+										onchange="#{sesion.setPage()} submit()">
 										<f:selectItems value="#{settings.countries}" />
 									</h:selectOneMenu>
 								</h:form></li>
