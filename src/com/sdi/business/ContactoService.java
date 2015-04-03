@@ -24,4 +24,6 @@ public interface ContactoService {
 
 	List<Contacto> findAdmin();
 
+	void addContact(Contacto c);
+
 }

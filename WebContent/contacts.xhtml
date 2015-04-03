@@ -38,6 +38,10 @@
 			<div class="wrap" id="contacts">
 				<div id="accordion" class="panel-group"
 					style="margin-bottom: 0px; margin-left: 40px; margin-right: 40px; display: inline-block;">
+					<button class="btnc btn-primary btn-md sort"
+						style="padding: 0px; padding-right: 2x; padding-left: 2x;"
+						data-toggle="modal" data-target="#contactModal">#{msgs.newContact}</button>
+					<br /> <br />
 					<h:form>
 						<h:inputText type="text" class="form-control search" name="search"
 							id="search" p:placeholder="#{msgs.search}"
@@ -82,5 +86,6 @@
 			</div>
 		</div>
 		<ui:include src="/snippets/sendModal.xhtml" />
+		<ui:include src="/snippets/contactModal.xhtml" />
 	</ui:define>
 </ui:composition>

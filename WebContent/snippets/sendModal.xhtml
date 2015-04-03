@@ -11,16 +11,22 @@
 				<div class="modal-header">
 					<h:button type="button" class="close" data-dismiss="modal"
 						value="x" />
-					<h4 class="modal-title" id="myModalLabel">New Message</h4>
+					<h4 class="modal-title" id="myModalLabel">#{msgs.newMail}</h4>
 				</div>
 				<div class="modal-body">
-					<h:outputLabel>Recipients:</h:outputLabel>
+					<h:outputLabel>#{msgs.recipients}</h:outputLabel>
+					<h:selectManyListbox value="#{sesion.recipients}" id="multiple"
+						class="select2" multiple="multiple" style="width: 100%;">
+						<f:selectItems value="#{sesion.user.contactos}" var="entry"
+							itemLabel="#{entry.nombre}" itemValue="#{entry}" />
+					</h:selectManyListbox>
 					<br /> <br />
 					<h:inputText required="true" requiredMessage="#{msgs.required}"
 						type="text" name="subject"
-						class="form-control input-sm chat-input" p:placeholder="subject"></h:inputText>
+						class="form-control input-sm chat-input"
+						p:placeholder="#{msgs.subject}"></h:inputText>
 					<br />
-					<h:outputLabel>Body:</h:outputLabel>
+					<h:outputLabel>#{msgs.body}</h:outputLabel>
 					<h:inputTextarea required="true" requiredMessage="#{msgs.required}"
 						name="body" class="form-control"></h:inputTextarea>
 				</div>
@@ -31,4 +37,30 @@
 			</h:form>
 		</div>
 	</div>
+	<link rel="stylesheet" type="text/css"
+		href="https://select2.github.io/select2/select2-3.4.1/select2.css" />
+	<link rel="stylesheet" type="text/css"
+		href="https://select2.github.io/select2/select2-3.4.1/select2.css" />
+	<link rel="stylesheet" type="text/css"
+		href="https://raw.githubusercontent.com/t0m/select2-bootstrap-css/bootstrap3/select2-bootstrap.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="https://select2.github.io/select2/select2-3.4.1/select2.js"></script>
+	<script>
+		$('.select2').select2({
+			placeholder : ''
+		});
+
+		$('.select2-remote').select2({
+			data : [ {
+				id : 'A',
+				text : 'A'
+			} ]
+		});
+
+		$('button[data-select2-open]').click(function() {
+			$('#' + $(this).data('select2-open')).select2('open');
+		});
+	</script>
 </ui:composition>

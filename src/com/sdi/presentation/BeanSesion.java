@@ -49,6 +49,18 @@ public class BeanSesion implements Serializable {
 	// criterio de busqueda
 	private String entry;
 
+	// enviar correo
+	private List<Contacto> recipients;
+	private String subject;
+	private String body;
+
+	// nuevo contacto
+	private String name;
+	private String surname;
+	private String address;
+	private String city;
+	private String email;
+
 	public String validate() {
 
 		UsuarioService us = Factories.services.createUsuarioService();
@@ -73,6 +85,19 @@ public class BeanSesion implements Serializable {
 		}
 		password = null;
 		repeatPassword = null;
+	}
+
+	public void addContact() {
+		ContactoService cs = Factories.services.createContactoService();
+		Contacto c = new Contacto();
+		c.setNombre(name);
+		c.setApellidos(surname);
+		c.setDireccion(address);
+		c.setEmail(email);
+		c.setCiudad(city);
+		c.setAgenda_Usuario(login);
+		cs.addContact(c);
+		user.getContactos().add(c);
 	}
 
 	private String init(Usuario user) {
@@ -450,6 +475,70 @@ public class BeanSesion implements Serializable {
 
 	public void setFail() {
 		this.fail = false;
+	}
+
+	public List<Contacto> getRecipients() {
+		return recipients;
+	}
+
+	public void setRecipients(List<Contacto> recipients) {
+		this.recipients = recipients;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

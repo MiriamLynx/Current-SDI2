@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	<!-- Send Modal -->
+	<div class="modal fade" id="contactModal" tabindex="-1"
+		style="opacity: 0.9;">
+		<div class="card card-container">
+			<h:form class="form-login" action="send" method="post">
+				<div class="modal-header">
+					<h:button type="button" class="close" data-dismiss="modal"
+						value="x" />
+					<h4 class="modal-title" id="myModalLabel">#{msgs.newContact}</h4>
+				</div>
+				<div class="modal-body">
+					<h:inputText type="text" required="true"
+						requiredMessage="#{msgs.required}" name="username" id="name"
+						class="form-control input-sm chat-input" value="#{sesion.name}"
+						p:placeholder="#{msgs.name}" />
+					<br />
+					<h:inputText type="text" required="true"
+						requiredMessage="#{msgs.required}" name="username" id="surname"
+						class="form-control input-sm chat-input" value="#{sesion.surname}"
+						p:placeholder="#{msgs.surname}" />
+					<br />
+					<h:inputText type="text" required="true"
+						requiredMessage="#{msgs.required}" name="username" id="address"
+						class="form-control input-sm chat-input" value="#{sesion.address}"
+						p:placeholder="#{msgs.address}" />
+					<br />
+					<h:inputText type="text" required="true"
+						requiredMessage="#{msgs.required}" name="username" id="email"
+						class="form-control input-sm chat-input" value="#{sesion.email}"
+						p:placeholder="#{msgs.mail}" />
+					<br />
+					<h:inputText type="text" required="true"
+						requiredMessage="#{msgs.required}" name="username" id="city"
+						class="form-control input-sm chat-input" value="#{sesion.city}"
+						p:placeholder="#{msgs.city}" />
+				</div>
+				<div class="modal-footer">
+					<h:commandButton value="#{msgs.submit}"
+						action="#{sesion.addContact}" class="btn btn-primary">
+					</h:commandButton>
+				</div>
+			</h:form>
+		</div>
+	</div>
+</ui:composition>
