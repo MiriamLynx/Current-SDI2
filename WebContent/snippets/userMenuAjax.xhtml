@@ -7,15 +7,15 @@
 		<ul class="nav">
 			<li><h:commandLink value="#{msgs.sent}"
 					action="#{mail.verEnviados}">
-					<f:ajax execute="@this" render="renderMe title" />
+					<f:ajax execute="@this" render="renderMe" />
 				</h:commandLink></li>
 			<li><h:commandLink value="#{msgs.drafts}"
 					action="#{mail.verBorradores}">
-					<f:ajax execute="@this" render="renderMe title" />
+					<f:ajax execute="@this" render="renderMe" />
 				</h:commandLink></li>
 			<li><h:commandLink value="#{msgs.deleted}"
 					action="#{mail.verEliminados}">
-					<f:ajax execute="@this" render="renderMe title" />
+					<f:ajax execute="@this" render="renderMe" />
 				</h:commandLink></li>
 			<li><h:commandLink value="#{msgs.contacts}"
 					action="#{contacts.verContactos}">

@@ -113,6 +113,10 @@ public class Usuario implements Serializable {
 		}
 	}
 
+	public void addContact(Contacto contacto) {
+		this.contactos.add(contacto);
+	}
+
 	public List<Correo> getBorradores() {
 		List<Correo> borradores = new ArrayList<Correo>();
 		for (Correo c : correos) {

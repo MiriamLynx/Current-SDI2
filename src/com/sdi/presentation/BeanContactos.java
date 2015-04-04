@@ -44,7 +44,8 @@ public class BeanContactos implements Serializable {
 				.getExternalContext().getSessionMap().get("USER")).getLogin());
 		cs.addContact(c);
 		((Usuario) FacesContext.getCurrentInstance().getExternalContext()
-				.getSessionMap().get("USER")).getContactos().add(c);
+				.getSessionMap().get("USER")).addContact(c);
+		contacts.add(c);
 	}
 
 	public void refreshContacts() {
