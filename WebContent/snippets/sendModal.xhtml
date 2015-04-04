@@ -15,20 +15,21 @@
 				</div>
 				<div class="modal-body">
 					<h:outputLabel>#{msgs.recipients}</h:outputLabel>
-					<h:selectManyListbox value="#{sesion.recipients}" id="multiple"
+					<h:selectManyListbox value="#{mail.recipients}" id="multiple"
 						class="select2" multiple="multiple" style="width: 100%;">
-						<f:selectItems value="#{sesion.user.contactos}" var="entry"
+						<f:selectItems value="#{contacts.contacts}" var="entry"
 							itemLabel="#{entry.nombre}" itemValue="#{entry}" />
 					</h:selectManyListbox>
 					<br /> <br />
-					<h:inputText required="true" requiredMessage="#{msgs.required}"
-						type="text" name="subject"
+					<h:inputText value="#{mail.subject}" required="true"
+						requiredMessage="#{msgs.required}" type="text" name="subject"
 						class="form-control input-sm chat-input"
 						p:placeholder="#{msgs.subject}"></h:inputText>
 					<br />
 					<h:outputLabel>#{msgs.body}</h:outputLabel>
-					<h:inputTextarea required="true" requiredMessage="#{msgs.required}"
-						name="body" class="form-control"></h:inputTextarea>
+					<h:inputTextarea value="#{mail.body}" required="true"
+						requiredMessage="#{msgs.required}" name="body"
+						class="form-control"></h:inputTextarea>
 				</div>
 				<div class="modal-footer">
 					<h:commandButton value="#{msgs.saveDraft}" class="btn btn-primary" />

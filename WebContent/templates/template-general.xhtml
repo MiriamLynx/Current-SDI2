@@ -9,6 +9,9 @@
 		<title>#{msgs.title}</title>
 	</h:head>
 	<h:body>
+		<script>
+			document.body.style.display = 'none';
+		</script>
 		<div class="container">
 			<ui:insert name="navbar">
 				<h:form>
@@ -21,8 +24,7 @@
 							<li class="active"><h:commandLink value="#{msgs.home}" /></li>
 							<li><h:form>
 									<h:selectOneMenu class="selectpicker"
-										value="#{settings.language}"
-										onchange="#{sesion.setPage()} submit()">
+										value="#{settings.language}" onchange="submit()">
 										<f:selectItems value="#{settings.countries}" />
 									</h:selectOneMenu>
 								</h:form></li>
@@ -51,6 +53,11 @@
 				<script src="lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 			</ui:insert>
 		</div>
+		<script>
+			$(function() {
+				$(document.body).fadeIn(500);
+			})
+		</script>
 	</h:body>
 </f:view>
 </html>

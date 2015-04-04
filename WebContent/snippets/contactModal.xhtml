@@ -16,32 +16,32 @@
 				<div class="modal-body">
 					<h:inputText type="text" required="true"
 						requiredMessage="#{msgs.required}" name="username" id="name"
-						class="form-control input-sm chat-input" value="#{sesion.name}"
+						class="form-control input-sm chat-input" value="#{contacts.name}"
 						p:placeholder="#{msgs.name}" />
 					<br />
 					<h:inputText type="text" required="true"
 						requiredMessage="#{msgs.required}" name="username" id="surname"
-						class="form-control input-sm chat-input" value="#{sesion.surname}"
-						p:placeholder="#{msgs.surname}" />
+						class="form-control input-sm chat-input"
+						value="#{contacts.surname}" p:placeholder="#{msgs.surname}" />
 					<br />
 					<h:inputText type="text" required="true"
 						requiredMessage="#{msgs.required}" name="username" id="address"
-						class="form-control input-sm chat-input" value="#{sesion.address}"
-						p:placeholder="#{msgs.address}" />
+						class="form-control input-sm chat-input"
+						value="#{contacts.address}" p:placeholder="#{msgs.address}" />
 					<br />
 					<h:inputText type="text" required="true"
 						requiredMessage="#{msgs.required}" name="username" id="email"
-						class="form-control input-sm chat-input" value="#{sesion.email}"
+						class="form-control input-sm chat-input" value="#{contacts.email}"
 						p:placeholder="#{msgs.mail}" />
 					<br />
 					<h:inputText type="text" required="true"
 						requiredMessage="#{msgs.required}" name="username" id="city"
-						class="form-control input-sm chat-input" value="#{sesion.city}"
+						class="form-control input-sm chat-input" value="#{contacts.city}"
 						p:placeholder="#{msgs.city}" />
 				</div>
 				<div class="modal-footer">
 					<h:commandButton value="#{msgs.submit}"
-						action="#{sesion.addContact}" class="btn btn-primary">
+						action="#{contacts.addContact}" class="btn btn-primary">
 					</h:commandButton>
 				</div>
 			</h:form>

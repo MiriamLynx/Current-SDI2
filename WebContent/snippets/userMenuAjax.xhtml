@@ -6,19 +6,19 @@
 	<h:form>
 		<ul class="nav">
 			<li><h:commandLink value="#{msgs.sent}"
-					action="#{sesion.verEnviados}">
+					action="#{mail.verEnviados}">
 					<f:ajax execute="@this" render="renderMe title" />
 				</h:commandLink></li>
 			<li><h:commandLink value="#{msgs.drafts}"
-					action="#{sesion.verBorradores}">
+					action="#{mail.verBorradores}">
 					<f:ajax execute="@this" render="renderMe title" />
 				</h:commandLink></li>
 			<li><h:commandLink value="#{msgs.deleted}"
-					action="#{sesion.verEliminados}">
+					action="#{mail.verEliminados}">
 					<f:ajax execute="@this" render="renderMe title" />
 				</h:commandLink></li>
 			<li><h:commandLink value="#{msgs.contacts}"
-					action="#{sesion.verContactos}">
+					action="#{contacts.verContactos}">
 				</h:commandLink></li>
 			<li><h:link value="#{msgs.profile}" outcome="profile">
 				</h:link></li>

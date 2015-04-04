@@ -20,7 +20,7 @@
 			</div>
 			<h:form id="title">
 				<div class="col-md-10" style="display: inline-block;">
-					<h1 class="">#{sesion.title}</h1>
+					<h1 class="">#{sesion.getTitle()}</h1>
 				</div>
 			</h:form>
 		</div>
@@ -45,9 +45,9 @@
 					<h:form>
 						<h:inputText type="text" class="form-control search" name="search"
 							id="search" p:placeholder="#{msgs.search}"
-							value="#{sesion.entry}">
+							value="#{contacts.entry}">
 							<f:ajax event="keyup" execute="@this" render="renderMe"
-								listener="#{sesion.refreshContacts}" />
+								listener="#{contacts.refreshContacts}" />
 						</h:inputText>
 					</h:form>
 				</div>
@@ -55,7 +55,7 @@
 				<ul class="list">
 					<h:form id="renderMe">
 						<h:panelGroup id="contactList">
-							<ui:repeat value="#{sesion.user.contactos}" var="entry">
+							<ui:repeat value="#{contacts.contacts}" var="entry">
 								<li>
 									<div id="accordion" class="panel-group"
 										style="margin-bottom: 0px; margin-left: 0px; margin-right: 40px;">

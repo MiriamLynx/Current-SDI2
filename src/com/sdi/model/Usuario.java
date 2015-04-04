@@ -1,9 +1,13 @@
 package com.sdi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = -1814868382112461111L;
+
 	private String login;
 	private String passwd;
 	private String rol;
@@ -93,7 +97,10 @@ public class Usuario {
 	}
 
 	public List<Contacto> getContactos() {
-		return contactos;
+		List<Contacto> clone = new ArrayList<Contacto>();
+		for (Contacto item : contactos)
+			clone.add(item);
+		return clone;
 	}
 
 	public void setContactos(List<Contacto> contactos) {

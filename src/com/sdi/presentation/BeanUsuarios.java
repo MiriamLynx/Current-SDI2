@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.sdi.business.UsuarioService;
 import com.sdi.infrastructure.Factories;
@@ -23,6 +24,17 @@ public class BeanUsuarios implements Serializable {
 		UsuarioService us = Factories.services.createUsuarioService();
 		activated = us.getAllActivated();
 		deactivated = us.getAllDeactivated();
+	}
+
+	public void setUsers() {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.put("PAGE", "users");
+	}
+
+	public String verUsers() {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.put("PAGE", "users");
+		return "users";
 	}
 
 	public List<Usuario> getActivated() {

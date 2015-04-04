@@ -18,7 +18,7 @@
 			</div>
 			<h:form id="title">
 				<div class="col-md-10" style="display: inline-block;">
-					<h1 class="">#{sesion.title}</h1>
+					<h1 class="">#{sesion.getTitle()}</h1>
 				</div>
 			</h:form>
 		</div>
@@ -35,23 +35,22 @@
 						<h:commandButton class="btnc btn-primary btn-md sort"
 							data-sort="date"
 							style="padding: 0px; padding-right: 2x; padding-left: 2x;"
-							value="#{msgs.sortSubject}" action="#{sesion.orderBySubject}">
+							value="#{msgs.sortSubject}" action="#{mail.orderBySubject}">
 							<f:ajax execute="@this" render="renderMe" />
 						</h:commandButton>
 						<h:commandButton class="btnc btn-primary btn-md sort"
 							data-sort="date"
 							style="padding: 0px; padding-right: 2x; padding-left: 2x;"
-							value="#{msgs.sortDate}" action="#{sesion.orderByDate}">
+							value="#{msgs.sortDate}" action="#{mail.orderByDate}">
 							<f:ajax execute="@this" render="renderMe" />
 						</h:commandButton>
 					</h:form>
 					<br />
 					<h:form>
 						<h:inputText type="text" class="form-control search" name="search"
-							id="search" p:placeholder="#{msgs.search}"
-							value="#{sesion.entry}">
+							id="search" p:placeholder="#{msgs.search}" value="#{mail.entry}">
 							<f:ajax event="keyup" execute="@this" render="renderMe"
-								listener="#{sesion.refreshMail}" />
+								listener="#{mail.refreshMail}" />
 						</h:inputText>
 					</h:form>
 				</div>
@@ -59,7 +58,7 @@
 				<ul class="list">
 					<h:form id="renderMe">
 						<h:panelGroup id="mailList">
-							<ui:repeat value="#{sesion.mail}" var="entry">
+							<ui:repeat value="#{mail.mail}" var="entry">
 								<li>
 									<div id="accordion" class="panel-group"
 										style="margin-bottom: 0px; margin-left: 0px; margin-right: 40px;">

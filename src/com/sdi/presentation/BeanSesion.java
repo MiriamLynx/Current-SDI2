@@ -1,8 +1,6 @@
 package com.sdi.presentation;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
@@ -14,8 +12,6 @@ import com.sdi.business.ContactoService;
 import com.sdi.business.CorreoService;
 import com.sdi.business.UsuarioService;
 import com.sdi.infrastructure.Factories;
-import com.sdi.model.Contacto;
-import com.sdi.model.Correo;
 import com.sdi.model.Usuario;
 
 @ManagedBean(name = "sesion")
@@ -34,11 +30,6 @@ public class BeanSesion implements Serializable {
 	// usuario en sesion
 	private Usuario user;
 
-	// visualizando
-	private String title;
-	private List<Correo> mail;
-	private String current;
-
 	// perfil
 	private String nombre;
 	private String apellidos;
@@ -46,26 +37,9 @@ public class BeanSesion implements Serializable {
 	private boolean success;
 	private boolean fail;
 
-	// criterio de busqueda
-	private String entry;
-
-	// enviar correo
-	private List<Contacto> recipients;
-	private String subject;
-	private String body;
-
-	// nuevo contacto
-	private String name;
-	private String surname;
-	private String address;
-	private String city;
-	private String email;
-
 	public String validate() {
-
 		UsuarioService us = Factories.services.createUsuarioService();
 		Usuario user = us.find(login);
-
 		if (check(user)) {
 			return init(user);
 		} else {
@@ -87,19 +61,6 @@ public class BeanSesion implements Serializable {
 		repeatPassword = null;
 	}
 
-	public void addContact() {
-		ContactoService cs = Factories.services.createContactoService();
-		Contacto c = new Contacto();
-		c.setNombre(name);
-		c.setApellidos(surname);
-		c.setDireccion(address);
-		c.setEmail(email);
-		c.setCiudad(city);
-		c.setAgenda_Usuario(login);
-		cs.addContact(c);
-		user.getContactos().add(c);
-	}
-
 	private String init(Usuario user) {
 		CorreoService cs = Factories.services.createCorreoService();
 		ContactoService cos = Factories.services.createContactoService();
@@ -108,14 +69,16 @@ public class BeanSesion implements Serializable {
 		setSession(user);
 		password = null;
 		if (user.getRol().equals("Administrador")) {
+			setPage("users");
 			user.setContactos(cos.findAdmin());
 			BeanUsuarios.init();
-			return setUsers();
+			return "users";
 		} else {
+			setPage("sent");
 			user.setCorreos(cs.findByLogin(login));
 			user.setContactos(cos.findByLogin(login));
 			user.addContacts(cos.findAdmin());
-			setEnviados();
+			BeanCorreos.init();
 			return "mail";
 		}
 	}
@@ -149,53 +112,45 @@ public class BeanSesion implements Serializable {
 		return true;
 	}
 
-	public void refreshMail() {
-		setPage();
-		List<Correo> filter = new ArrayList<Correo>();
-		for (int i = 0; i < mail.size(); i++) {
-			if (!(mail.get(i).getAsunto().contains(entry))
-					&& !(mail.get(i).getCuerpo().contains(entry))
-					&& !(mail.get(i).getLogin_Usuario().contains(entry))) {
-				filter.add(mail.get(i));
-			}
+	public String getPage() {
+		String page = (String) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("PAGE");
+		if (page.equals("sent") || page.equals("drafts")
+				|| page.equals("deleted")) {
+			return "mail";
+		} else if (page.equals("users")) {
+			return "users";
+		} else if (page.equals("contacts")) {
+			return "contacts";
 		}
-		for (Correo c : filter) {
-			mail.remove(c);
-		}
+		return "";
 	}
 
-	public void refreshContacts() {
-		init(user);
-		List<Contacto> filter = new ArrayList<Contacto>();
-		for (int i = 0; i < user.getContactos().size(); i++) {
-			if (!(user.getContactos().get(i).getNombre().contains(entry))
-					&& !(user.getContactos().get(i).getApellidos()
-							.contains(entry))
-					&& !(user.getContactos().get(i).getEmail().contains(entry))
-					&& !(user.getContactos().get(i).getAgenda_Usuario()
-							.contains(entry))) {
-				filter.add(user.getContactos().get(i));
+	public String getTitle() {
+		String page = (String) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("PAGE");
+		if (page != null) {
+			switch (page) {
+			case "sent":
+				return getLocaleString("sent");
+			case "drafts":
+				return getLocaleString("drafts");
+			case "deleted":
+				return getLocaleString("deleted");
+			case "users":
+				return getLocaleString("users");
+			case "contacts":
+				return getLocaleString("contacts");
+			default:
+				return "";
 			}
 		}
-		for (Contacto c : filter) {
-			user.getContactos().remove(c);
-		}
+		return "";
 	}
 
-	public void setPage() {
-		if (current != null) {
-			if (this.current.equals("sent")) {
-				setEnviados();
-			} else if (this.current.equals("drafts")) {
-				setBorradores();
-			} else if (this.current.equals("deleted")) {
-				setEliminados();
-			} else if (this.current.equals("contacts")) {
-				setContactos();
-			} else if (this.current.equals("users")) {
-				setUsers();
-			}
-		}
+	public void setPage(String page) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.put("PAGE", page);
 	}
 
 	private void setSession(Usuario usuario) {
@@ -211,69 +166,10 @@ public class BeanSesion implements Serializable {
 		return "home";
 	}
 
-	public void orderBySubject() {
-		int[] index = getIndexSubject();
-		java.util.Arrays.sort(index);
-		getMailBackSubject(index);
-	}
-
-	public void getMailBackSubject(int[] index) {
-		int evaluated = 0;
-		List<Correo> aux = new ArrayList<Correo>();
-		for (int i = 0; i < index.length; i++) {
-			for (int j = 0; j < index.length; j++) {
-				if (index[i] == mail.get(j).getAsunto().hashCode()
-						&& evaluated != index.length) {
-					aux.add(mail.get(j));
-					evaluated++;
-				}
-			}
-		}
-		mail = aux;
-	}
-
-	public int[] getIndexSubject() {
-		int[] index = new int[mail.size()];
-		for (int i = 0; i < mail.size(); i++) {
-			index[i] = mail.get(i).getAsunto().hashCode();
-		}
-		return index;
-	}
-
-	public void getMailBackDate(int[] index) {
-		int evaluated = 0;
-		List<Correo> aux = new ArrayList<Correo>();
-		for (int i = 0; i < index.length; i++) {
-			for (int j = 0; j < index.length; j++) {
-				if (index[i] == mail.get(j).getFormatedDate().hashCode()
-						&& evaluated != index.length) {
-					aux.add(mail.get(j));
-					evaluated++;
-				}
-			}
-		}
-		mail = aux;
-	}
-
-	public int[] getIndexDate() {
-		int[] index = new int[mail.size()];
-		for (int i = 0; i < mail.size(); i++) {
-			index[i] = mail.get(i).getFormatedDate().hashCode();
-		}
-		return index;
-	}
-
-	public void orderByDate() {
-		int[] index = getIndexDate();
-		java.util.Arrays.sort(index);
-		getMailBackDate(index);
-	}
-
 	public void clear() {
 		this.user = null;
 		this.login = null;
 		this.password = null;
-		this.entry = null;
 	}
 
 	public String getLogin() {
@@ -324,105 +220,12 @@ public class BeanSesion implements Serializable {
 		this.user = user;
 	}
 
-	public void setContactos() {
-		this.title = getLocaleString("contacts");
-		current = "contacts";
-	}
-
-	public String setUsers() {
-		this.title = getLocaleString("users");
-		current = "users";
-		return "users";
-	}
-
-	public String verContactos() {
-		this.title = getLocaleString("contacts");
-		current = "contacts";
-		return "contacts";
-	}
-
-	public void setEnviados() {
-		this.title = getLocaleString("sent");
-		this.current = "sent";
-		this.mail = user.getEnviados();
-	}
-
-	public void setEliminados() {
-		this.title = getLocaleString("deleted");
-		this.current = "deleted";
-		this.mail = user.getEliminados();
-	}
-
-	public void setBorradores() {
-		this.title = getLocaleString("drafts");
-		this.current = "drafts";
-		this.mail = user.getBorradores();
-	}
-
-	public String verEnviados() {
-		this.title = getLocaleString("sent");
-		this.current = "sent";
-		this.mail = user.getEnviados();
-		return "mail";
-	}
-
-	public String verEliminados() {
-		this.title = getLocaleString("deleted");
-		this.current = "deleted";
-		this.mail = user.getEliminados();
-		return "mail";
-	}
-
-	public String verBorradores() {
-		this.title = getLocaleString("drafts");
-		this.current = "drafts";
-		this.mail = user.getBorradores();
-		return "mail";
-	}
-
-	public List<Contacto> getContactos() {
-		this.title = getLocaleString("contacts");
-		return user.getContactos();
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public List<Correo> getMail() {
-		return mail;
-	}
-
-	public void setMail(List<Correo> mail) {
-		this.mail = mail;
-	}
-
 	private String getLocaleString(String string) {
 		ResourceBundle bundle = FacesContext.getCurrentInstance()
 				.getApplication()
 				.getResourceBundle(FacesContext.getCurrentInstance(), "msgs");
 		FacesMessage msg = new FacesMessage(bundle.getString(string));
 		return msg.getSummary();
-	}
-
-	public String getEntry() {
-		return entry;
-	}
-
-	public void setEntry(String entry) {
-		this.entry = entry;
-	}
-
-	public String getCurrent() {
-		return current;
-	}
-
-	public void setCurrent(String current) {
-		this.current = current;
 	}
 
 	public String getNombre() {
@@ -449,18 +252,6 @@ public class BeanSesion implements Serializable {
 		this.apellidos = apellidos;
 	}
 
-	public String getPage() {
-		if (current.equals("sent") || current.equals("drafts")
-				|| current.equals("deleted")) {
-			return "mail";
-		} else if (current.equals("users")) {
-			return "users";
-		} else if (current.equals("contacts")) {
-			return "contacts";
-		}
-		return "";
-	}
-
 	public boolean isSuccess() {
 		return success;
 	}
@@ -475,70 +266,6 @@ public class BeanSesion implements Serializable {
 
 	public void setFail() {
 		this.fail = false;
-	}
-
-	public List<Contacto> getRecipients() {
-		return recipients;
-	}
-
-	public void setRecipients(List<Contacto> recipients) {
-		this.recipients = recipients;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public String getBody() {
-		return body;
-	}
-
-	public void setBody(String body) {
-		this.body = body;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 }
