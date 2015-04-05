@@ -47,7 +47,7 @@ public class CorreoJdbcDao implements CorreoDao {
 				correo.setCuerpo(rs.getString("CUERPO"));
 				correo.setCarpeta(rs.getInt("CARPETA"));
 				correo.setLogin_Usuario(rs.getString("LOGIN_USUARIO"));
-
+				correo.setDestinatarios(getDestinatariosCorreo(correo.getId()));
 				correos.add(correo);
 			}
 		} catch (SQLException e) {
@@ -164,6 +164,7 @@ public class CorreoJdbcDao implements CorreoDao {
 				correo.setCuerpo(rs.getString("CUERPO"));
 				correo.setCarpeta(rs.getInt("CARPETA"));
 				correo.setLogin_Usuario(rs.getString("LOGIN_USUARIO"));
+				correo.setDestinatarios(getDestinatariosCorreo(correo.getId()));
 				correos.add(correo);
 			}
 		} catch (SQLException e) {
@@ -224,6 +225,7 @@ public class CorreoJdbcDao implements CorreoDao {
 				correo.setCuerpo(rs.getString("CUERPO"));
 				correo.setCarpeta(rs.getInt("CARPETA"));
 				correo.setLogin_Usuario(rs.getString("LOGIN_USUARIO"));
+				correo.setDestinatarios(getDestinatariosCorreo(correo.getId()));
 				correos.add(correo);
 			}
 		} catch (SQLException e) {

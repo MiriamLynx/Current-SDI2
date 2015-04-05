@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/template-general.xhtml"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="option">
+		<li><h:commandLink value="#{msgs.signout}" action="#{sesion.end}" /></li>
+	</ui:define>
+
+	<ui:define name="cuerpo">
+		<div class="row">
+			<div class="wrap col-md-offset-4 col-md-4">
+				<h:form class="form-login" action="send" method="post">
+					<div class="modal-header"
+						style="max-width: 250px; margin-left: 50px; margin-right: 50px;">
+						<h4 class="modal-title" id="myModalLabel">#{msgs.editDraft}</h4>
+					</div>
+					<div class="modal-body"
+						style="max-width: 250px; margin-left: 50px; margin-right: 50px;">
+						<h:outputLabel>#{msgs.recipients}</h:outputLabel>
+						<br /> <br />
+						<h:selectManyListbox value="#{mail.recipients}" id="multiple"
+							class="select2" multiple="multiple" style="width: 100%;">
+							<f:selectItems value="#{sesion.user.contactos}" var="entry"
+								itemLabel="#{entry.nombre}" itemValue="#{entry}" />
+						</h:selectManyListbox>
+						<br /> <br />
+						<h:outputLabel>#{msgs.subject}</h:outputLabel>
+						<h:inputText value="#{mail.subject}" required="true"
+							requiredMessage="#{msgs.required}" type="text" name="subject"
+							class="form-control input-sm chat-input"
+							p:placeholder="#{msgs.subject}"></h:inputText>
+						<br />
+						<h:outputLabel>#{msgs.body}</h:outputLabel>
+						<h:inputTextarea value="#{mail.body}" required="true"
+							requiredMessage="#{msgs.required}" name="body"
+							class="form-control"></h:inputTextarea>
+					</div>
+					<div class="modal-footer"
+						style="max-width: 250px; margin-left: 50px; margin-right: 50px;">
+						<h:button value="#{msgs.saveDraft}"
+							action="#{mail.saveDraftAction}" class="btn btn-primary">
+						</h:button>
+						<br /> <br />
+						<h:button value="#{msgs.send}" action="#{mail.sendAction}"
+							class="btn btn-primary">
+						</h:button>
+						<h:link value="#{msgs.cancel}" class="btn btn-primary"
+							outcome="#{sesion.getPage()}" />
+					</div>
+				</h:form>
+			</div>
+		</div>
+		<link rel="stylesheet" type="text/css"
+			href="https://select2.github.io/select2/select2-3.4.1/select2.css" />
+		<link rel="stylesheet" type="text/css"
+			href="https://select2.github.io/select2/select2-3.4.1/select2.css" />
+		<link rel="stylesheet" type="text/css"
+			href="https://raw.githubusercontent.com/t0m/select2-bootstrap-css/bootstrap3/select2-bootstrap.css" />
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script
+			src="https://select2.github.io/select2/select2-3.4.1/select2.js"></script>
+		<script>
+			$('.select2').select2({
+				placeholder : ''
+			});
+
+			$('.select2-remote').select2({
+				data : [ {
+					id : 'A',
+					text : 'A'
+				} ]
+			});
+
+			$('button[data-select2-open]').click(function() {
+				$('#' + $(this).data('select2-open')).select2('open');
+			});
+		</script>
+	</ui:define>
+</ui:composition>

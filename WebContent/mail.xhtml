@@ -13,8 +13,12 @@
 		<div class="container-head">
 			<div class="col-md-2" style="display: inline-block;">
 				<br /> <br />
-				<button class="btn btn-primary btn-md" data-toggle="modal"
-					data-target="#sendModal">#{msgs.compose}</button>
+				<h:form>
+					<h:commandButton class="btn btn-primary btn-md"
+						onclick="
+						$('#sendModal').modal('show'); return false"
+						value="#{msgs.compose}" />
+				</h:form>
 			</div>
 			<h:form id="title">
 				<div class="col-md-10" style="display: inline-block;">
@@ -64,14 +68,24 @@
 										style="margin-bottom: 0px; margin-left: 0px; margin-right: 40px;">
 										<div class="panel panel-default" style="opacity: 0.7;">
 											<div class="panel-heading" style="margin: 0px;">
-												<a data-toggle="collapse" data-parent="#accordion"
-													href="#${entry.id}" class="collapsed"> <span
-													class="subject" style="min-width: 120px;">${entry.asunto}</span>
-													<span class="pull-right"><span class="date">${entry.formatedDate}</span>
-												</span>
-
-												</a>
-
+												<h:panelGroup rendered="#{sesion.getMailPage() != 'drafts'}">
+													<a data-toggle="collapse" data-parent="#accordion"
+														href="#${entry.id}" class="collapsed"> <span
+														class="subject" style="min-width: 120px;">${entry.asunto}</span>
+														<span class="pull-right"><span class="date">${entry.formatedDate}</span>
+													</span>
+													</a>
+												</h:panelGroup>
+												<h:panelGroup rendered="#{sesion.getMailPage() == 'drafts'}">
+													<a data-toggle="collapse" data-parent="#accordion"
+														href="#${entry.id}" class="collapsed"> <span
+														class="subject" style="min-width: 120px;">${entry.asunto}</span>
+														<span class="pull-right"> <h:commandButton
+																value="#{msgs.edit}" action="#{mail.load()}">
+																<f:param name="draft" value="${entry.id}" />
+															</h:commandButton> <span class="date">${entry.formatedDate}</span></span>
+													</a>
+												</h:panelGroup>
 											</div>
 											<div id="${entry.id}" class="panel-collapse collapse"
 												style="height: 0px;">

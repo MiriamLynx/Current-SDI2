@@ -126,6 +126,12 @@ public class BeanSesion implements Serializable {
 		return "";
 	}
 
+	public String getMailPage() {
+		String page = (String) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("PAGE");
+		return page;
+	}
+
 	public String getTitle() {
 		String page = (String) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get("PAGE");

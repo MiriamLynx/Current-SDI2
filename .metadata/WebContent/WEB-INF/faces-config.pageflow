@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14260228949500" configfile="/sdi2-1/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="764" id="pf14275376530460" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf14275376530462 pf14278012627960 pf14278234763094 pf14278849450110 pf14278849450111" path="*"/>
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="562" id="pf14275376530464" referenceLink="//@navigationRule.5/@navigationCase.1/@toViewId|" outlinks="pf142772705448610 pf14278012627971" inlinks="pf14275376530462 pf142772705448610" path="/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="error.xhtml" x="338" y="178" id="pf14278012627972" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14278012627960" path="/error.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="mail.xhtml" x="554" y="764" id="pf14278012627973" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf14278012627971 pf14278234763094" path="/mail.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="contacts.xhtml" x="338" y="967" id="pf14278849450112" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14278849450110" path="/contacts.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="profile.xhtml" id="pf14278849450113" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14278849450111" path="/profile.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="1138" id="pf14275376530460" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf14275376530462 pf14278012627960 pf14278234763094 pf14278849450110 pf14278849450111 pf14282637690860" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf14275376530464" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" outlinks="pf14282664561285" inlinks="pf14275376530462 pf14282664561285" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="error.xhtml" x="338" y="562" id="pf14278012627972" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14278012627960" path="/error.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="mail.xhtml" x="338" y="946" id="pf14278012627973" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf14278234763094" path="/mail.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="contacts.xhtml" x="338" y="1330" id="pf14278849450112" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14278849450110" path="/contacts.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="profile.xhtml" x="338" y="1714" id="pf14278849450113" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14278849450111" path="/profile.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="users.xhtml" x="338" y="2098" id="pf14282637690861" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf14282637690860" path="/users.xhtml"/>
   <links id="pf14275376530462" target="pf14275376530464" source="pf14275376530460" outcome="home"/>
   <links id="pf14278012627960" target="pf14278012627972" source="pf14275376530460" outcome="error"/>
-  <links id="pf14278012627971" target="pf14278012627973" source="pf14275376530464" outcome="exit"/>
   <links id="pf14278234763094" target="pf14278012627973" source="pf14275376530460" outcome="mail"/>
   <links id="pf14278849450110" target="pf14278849450112" source="pf14275376530460" outcome="contacts"/>
-  <links id="pf142772705448610" target="pf14275376530464" source="pf14275376530464" outcome="fail">
-    <bendPoints d1Height="-36" d2Height="-36"/>
-    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
-    <bendPoints d1Width="-64" d2Width="-64"/>
-  </links>
   <links id="pf14278849450111" target="pf14278849450113" source="pf14275376530460" outcome="profile"/>
+  <links id="pf14282637690860" target="pf14282637690861" source="pf14275376530460" outcome="users"/>
+  <links id="pf14282664561285" target="pf14275376530464" source="pf14275376530464" outcome="fail"/>
 </pageflow:Pageflow>

@@ -147,4 +147,13 @@ public class Usuario implements Serializable {
 		return eliminados;
 	}
 
+	public Correo getBorrador(Integer id) {
+		for (Correo c : correos) {
+			if (c.getCarpeta() == 2 && c.getId() == id) {
+				return c;
+			}
+		}
+		return null;
+	}
+
 }

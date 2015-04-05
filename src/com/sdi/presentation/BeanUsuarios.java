@@ -19,11 +19,17 @@ public class BeanUsuarios implements Serializable {
 
 	private static List<Usuario> activated;
 	private static List<Usuario> deactivated;
+	
+	private String[] logins;
 
 	public static void init() {
 		UsuarioService us = Factories.services.createUsuarioService();
 		activated = us.getAllActivated();
 		deactivated = us.getAllDeactivated();
+	}
+
+	public void activate() {
+
 	}
 
 	public void setUsers() {
@@ -43,6 +49,14 @@ public class BeanUsuarios implements Serializable {
 
 	public List<Usuario> getDeactivated() {
 		return deactivated;
+	}
+
+	public String[] getLogins() {
+		return logins;
+	}
+
+	public void setLogins(String[] logins) {
+		this.logins = logins;
 	}
 
 }

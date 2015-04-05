@@ -37,6 +37,30 @@ public class BeanCorreos implements Serializable {
 				.getEnviados();
 	}
 
+	public String load() {
+		if (FacesContext.getCurrentInstance().getExternalContext()
+				.getRequestParameterMap().get("draft") != null) {
+			Integer id = Integer
+					.parseInt(FacesContext.getCurrentInstance()
+							.getExternalContext().getRequestParameterMap()
+							.get("draft"));
+			Correo correo = ((Usuario) FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap().get("USER"))
+					.getBorrador(id);
+			this.recipients = correo.getDestinatarios();
+			this.subject = correo.getAsunto();
+			this.body = correo.getCuerpo();
+			return "editDraft";
+		}
+		return "";
+	}
+
+	public void store() {
+		this.recipients = null;
+		this.subject = null;
+		this.body = null;
+	}
+
 	public void refreshMail() {
 		setPage();
 		List<Correo> filter = new ArrayList<Correo>();
@@ -52,6 +76,16 @@ public class BeanCorreos implements Serializable {
 		}
 	}
 
+	public String saveDraftAction() {
+		saveDraft();
+		return "mail";
+	}
+
+	public String sendAction() {
+		send();
+		return "mail";
+	}
+
 	public void saveDraft() {
 		CorreoService cs = Factories.services.createCorreoService();
 		Correo correo = new Correo();
@@ -61,6 +95,7 @@ public class BeanCorreos implements Serializable {
 		correo.setCarpeta(2);
 		correo.setLogin_Usuario(((Usuario) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get("USER")).getLogin());
+		correo.setFechahora(System.currentTimeMillis());
 		cs.save(correo);
 		((Usuario) FacesContext.getCurrentInstance().getExternalContext()
 				.getSessionMap().get("USER")).getCorreos().add(correo);
@@ -76,6 +111,7 @@ public class BeanCorreos implements Serializable {
 		correo.setCarpeta(1);
 		correo.setLogin_Usuario(((Usuario) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get("USER")).getLogin());
+		correo.setFechahora(System.currentTimeMillis());
 		cs.save(correo);
 		((Usuario) FacesContext.getCurrentInstance().getExternalContext()
 				.getSessionMap().get("USER")).getCorreos().add(correo);
@@ -186,29 +222,17 @@ public class BeanCorreos implements Serializable {
 	}
 
 	public String verEnviados() {
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.put("PAGE", "sent");
-		mail = ((Usuario) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("USER"))
-				.getEnviados();
+		setEnviados();
 		return "mail";
 	}
 
 	public String verEliminados() {
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.put("PAGE", "deleted");
-		mail = ((Usuario) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("USER"))
-				.getEliminados();
+		setEliminados();
 		return "mail";
 	}
 
 	public String verBorradores() {
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.put("PAGE", "drafts");
-		mail = ((Usuario) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("USER"))
-				.getBorradores();
+		setBorradores();
 		return "mail";
 	}
 

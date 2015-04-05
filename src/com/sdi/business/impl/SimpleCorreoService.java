@@ -18,4 +18,5 @@ public class SimpleCorreoService implements CorreoService {
 	public void save(Correo correo) {
 		new Save().save(correo);
 	}
+
 }
