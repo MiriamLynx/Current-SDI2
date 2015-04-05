@@ -31,11 +31,6 @@
 						<h:panelGroup>
 							<h:panelGroup rendered="#{not empty users.activated}">
 								<h4>#{msgs.activated}</h4>
-								<h:commandButton class="btnc btn-primary btn-md sort"
-									style="padding: 0px; padding-right: 2x; padding-left: 2x;"
-									value="#{msgs.deactivate}" actionListener="#{users.activate}" />
-								<br />
-								<br />
 							</h:panelGroup>
 							<ui:repeat value="#{users.activated}" var="entry">
 								<li>
@@ -43,20 +38,23 @@
 										style="margin-bottom: 0px; margin-left: 0px; margin-right: 40px;">
 										<div class="panel panel-default" style="opacity: 0.7;">
 											<div class="panel-heading" style="margin: 0px;">
-												<label class=""> 
-												
-												
-												<h:selectManyCheckbox
-														value="#{user.favNumber2}">
-														<f:selectItems value="#{user.favNumber2Value}" />
-													</h:selectManyCheckbox>
-													
-													 <input type="checkbox" name="toDeactivate"
-													value="${entry.login}" /></label> <a
-													href="profile?user=${entry.login}"> <span class="name"
-													style="min-width: 120px;">${entry.nombre}</span> <span>${entry.apellidos}</span>
-													<span>${entry.email}</span> <span class="pull-right"></span>
+
+												<a data-toggle="collapse" data-parent="#accordion"
+													href="#${entry.id}" class="collapsed">${entry.nombre} <span>${entry.apellidos}</span>
+
+
+													<span class="pull-right"> <h:commandButton
+															value="#{msgs.edit}" action="#{users.load()}">
+															<f:param name="user" value="${entry.id}" />
+														</h:commandButton>
+												</span>
 												</a>
+											</div>
+											<div id="${entry.id}" class="panel-collapse collapse"
+												style="height: 0px;">
+												<div class="panel-body">
+													<span class="body">${entry.email}</span>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -72,11 +70,6 @@
 								<br />
 								<br />
 								<h4>#{msgs.deactivated}</h4>
-								<h:commandButton class="btnc btn-primary btn-md sort"
-									style="padding: 0px; padding-right: 2x; padding-left: 2x;"
-									value="#{msgs.activate}" />
-								<br />
-								<br />
 							</h:panelGroup>
 							<ui:repeat value="#{users.deactivated}" var="entry">
 								<li>
@@ -84,12 +77,23 @@
 										style="margin-bottom: 0px; margin-left: 0px; margin-right: 40px;">
 										<div class="panel panel-default" style="opacity: 0.7;">
 											<div class="panel-heading" style="margin: 0px;">
-												<label class=""> <input type="checkbox"
-													name="toDeactivate" value="${entry.login}" /></label> <a
-													href="profile?user=${entry.login}"> <span class="name"
-													style="min-width: 120px;">${entry.nombre}</span> <span>${entry.apellidos}</span>
-													<span>${entry.email}</span> <span class="pull-right"></span>
+
+												<a data-toggle="collapse" data-parent="#accordion"
+													href="#${entry.id}" class="collapsed">${entry.nombre} <span>${entry.apellidos}</span>
+
+
+													<span class="pull-right"> <h:commandButton
+															value="#{msgs.edit}" action="#{users.load()}">
+															<f:param name="user" value="${entry.id}" />
+														</h:commandButton>
+												</span>
 												</a>
+											</div>
+											<div id="${entry.id}" class="panel-collapse collapse"
+												style="height: 0px;">
+												<div class="panel-body">
+													<span class="body">${entry.email}</span>
+												</div>
 											</div>
 										</div>
 									</div>
