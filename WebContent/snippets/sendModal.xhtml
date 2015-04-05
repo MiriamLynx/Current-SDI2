@@ -32,8 +32,14 @@
 						class="form-control"></h:inputTextarea>
 				</div>
 				<div class="modal-footer">
-					<h:commandButton value="#{msgs.saveDraft}" class="btn btn-primary" />
-					<h:commandButton value="#{msgs.send}" class="btn btn-primary" />
+					<h:commandButton value="#{msgs.saveDraft}"
+						actionListener="#{mail.saveDraft}" class="btn btn-primary">
+						<f:ajax execute="@this" render="renderMe" />
+					</h:commandButton>
+					<h:commandButton value="#{msgs.send}" actionListener="#{mail.send}"
+						class="btn btn-primary">
+						<f:ajax execute="@this" render="renderMe" />
+					</h:commandButton>
 				</div>
 			</h:form>
 		</div>

@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import com.sdi.business.CorreoService;
+import com.sdi.infrastructure.Factories;
 import com.sdi.model.Contacto;
 import com.sdi.model.Correo;
 import com.sdi.model.Usuario;
@@ -48,6 +50,42 @@ public class BeanCorreos implements Serializable {
 		for (Correo c : filter) {
 			mail.remove(c);
 		}
+	}
+
+	public void saveDraft() {
+		CorreoService cs = Factories.services.createCorreoService();
+		Correo correo = new Correo();
+		correo.setAsunto(subject);
+		correo.setCuerpo(body);
+		correo.setDestinatarios(recipients);
+		correo.setCarpeta(2);
+		correo.setLogin_Usuario(((Usuario) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("USER")).getLogin());
+		cs.save(correo);
+		((Usuario) FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("USER")).getCorreos().add(correo);
+		clear();
+	}
+
+	public void send() {
+		CorreoService cs = Factories.services.createCorreoService();
+		Correo correo = new Correo();
+		correo.setAsunto(subject);
+		correo.setCuerpo(body);
+		correo.setDestinatarios(recipients);
+		correo.setCarpeta(1);
+		correo.setLogin_Usuario(((Usuario) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("USER")).getLogin());
+		cs.save(correo);
+		((Usuario) FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("USER")).getCorreos().add(correo);
+		clear();
+	}
+
+	private void clear() {
+		subject = null;
+		recipients = null;
+		body = null;
 	}
 
 	public void setPage() {

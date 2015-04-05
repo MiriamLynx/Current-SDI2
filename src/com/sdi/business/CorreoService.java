@@ -22,4 +22,6 @@ public interface CorreoService {
 
 	List<Correo> findByLogin(String login);
 
+	void save(Correo correo);
+
 }
