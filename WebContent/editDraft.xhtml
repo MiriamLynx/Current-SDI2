@@ -40,13 +40,13 @@
 					</div>
 					<div class="modal-footer"
 						style="max-width: 250px; margin-left: 50px; margin-right: 50px;">
-						<h:button value="#{msgs.saveDraft}"
-							action="#{mail.saveDraftAction}" class="btn btn-primary">
-						</h:button>
+						<h:commandButton value="#{msgs.saveDraft}"
+							action="#{mail.saveDraftAction()}" class="btn btn-primary">
+						</h:commandButton>
 						<br /> <br />
-						<h:button value="#{msgs.send}" action="#{mail.sendAction}"
-							class="btn btn-primary">
-						</h:button>
+						<h:commandButton value="#{msgs.send}"
+							action="#{mail.sendAction()}" class="btn btn-primary">
+						</h:commandButton>
 						<h:link value="#{msgs.cancel}" class="btn btn-primary"
 							outcome="#{sesion.getPage()}" />
 					</div>
