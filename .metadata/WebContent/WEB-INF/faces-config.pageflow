@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14260228949500" configfile="/sdi2-1/WebContent/WEB-INF/faces-config.xml">
   <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="1138" id="pf14275376530460" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf14275376530462 pf14278012627960 pf14278234763094 pf14278849450110 pf14278849450111 pf14282637690860" path="*"/>
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf14275376530464" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" outlinks="pf14282664561285" inlinks="pf14275376530462 pf14282664561285" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf14275376530464" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" outlinks="pf14282664561285" inlinks="pf14275376530462 pf14282664561285" path="/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="error.xhtml" x="338" y="562" id="pf14278012627972" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14278012627960" path="/error.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="mail.xhtml" x="338" y="946" id="pf14278012627973" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf14278234763094" path="/mail.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="contacts.xhtml" x="338" y="1330" id="pf14278849450112" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14278849450110" path="/contacts.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="profile.xhtml" x="338" y="1714" id="pf14278849450113" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14278849450111" path="/profile.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="users.xhtml" x="338" y="2098" id="pf14282637690861" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf14282637690860" path="/users.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editDraft" id="pf14282717153516" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf14282717153517" path="editDraft"/>
+  <nodes xsi:type="pageflow:PFPage" name="editDraft.xhtml" id="pf14282717153518" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf14282717153517" path="/editDraft.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editUser" id="pf14282717153519" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf142827171535110" path="editUser"/>
+  <nodes xsi:type="pageflow:PFPage" name="editUser.xhtml" id="pf142827171535111" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf142827171535110" path="/editUser.xhtml"/>
   <links id="pf14275376530462" target="pf14275376530464" source="pf14275376530460" outcome="home"/>
   <links id="pf14278012627960" target="pf14278012627972" source="pf14275376530460" outcome="error"/>
   <links id="pf14278234763094" target="pf14278012627973" source="pf14275376530460" outcome="mail"/>
@@ -14,4 +18,6 @@
   <links id="pf14278849450111" target="pf14278849450113" source="pf14275376530460" outcome="profile"/>
   <links id="pf14282637690860" target="pf14282637690861" source="pf14275376530460" outcome="users"/>
   <links id="pf14282664561285" target="pf14275376530464" source="pf14275376530464" outcome="fail"/>
+  <links id="pf14282717153517" target="pf14282717153518" source="pf14282717153516" outcome="home"/>
+  <links id="pf142827171535110" target="pf142827171535111" source="pf14282717153519" outcome="home"/>
 </pageflow:Pageflow>
