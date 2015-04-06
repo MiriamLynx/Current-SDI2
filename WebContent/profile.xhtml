@@ -10,6 +10,16 @@
 	</ui:define>
 
 	<ui:define name="cuerpo">
+		<h:panelGroup rendered="#{sesion.user.rol == 'Cliente'}">
+			<a href="mail.xhtml" style="color: black;"><i>#{msgs.home}</i></a>
+			<b>#{msgs.barras}</b>
+			<a href="profile.xhtml" style="color: black;"><i>#{msgs.profile}</i></a>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{sesion.user.rol == 'Administrador'}">
+			<a href="users.xhtml" style="color: black;"><i>#{msgs.home}</i></a>
+			<b>#{msgs.barras}</b>
+			<a href="profile.xhtml" style="color: black;"><i>#{msgs.profile}</i></a>
+		</h:panelGroup>
 		<div class="row">
 			<div class="wrap col-md-offset-4 col-md-4">
 				<h:form>

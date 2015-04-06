@@ -10,11 +10,14 @@
 	</ui:define>
 
 	<ui:define name="cuerpo">
+		<a href="users.xhtml" style="color: black;"><i>#{msgs.home}</i></a>
+		<b>#{msgs.barras}</b>
+		<a href="editUser.xhtml" style="color: black;"><i>#{msgs.editUser}</i></a>
 		<div class="row">
 			<div class="wrap col-md-offset-4 col-md-4">
 				<h:form>
 					<h4
-						style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px;">#{msgs.changes}</h4>
+						style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px;">#{msgs.editUser}</h4>
 					<h:inputText type="text" required="true"
 						style="max-width:250px; margin-left:50px; margin-right:50px;"
 						requiredMessage="#{msgs.required}" name="name"
