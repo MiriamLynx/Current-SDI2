@@ -8,4 +8,6 @@ public interface ServicesFactory {
 
 	ContactoService createContactoService();
 
+	ResetService createResetService();
+
 }

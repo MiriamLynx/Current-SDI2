@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 
 import com.sdi.business.ContactoService;
 import com.sdi.business.CorreoService;
+import com.sdi.business.ResetService;
 import com.sdi.business.UsuarioService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.Usuario;
@@ -36,6 +37,8 @@ public class BeanSesion implements Serializable {
 	private String repeatPassword;
 	private boolean success;
 	private boolean fail;
+	private boolean newusersuccess;
+	private boolean newuserfail;
 
 	public String validate() {
 		UsuarioService us = Factories.services.createUsuarioService();
@@ -47,18 +50,62 @@ public class BeanSesion implements Serializable {
 		}
 	}
 
+	public void setFalse() {
+		this.deactivated = false;
+		this.fail = false;
+		this.newuserfail = false;
+		this.newusersuccess = false;
+		this.wrongPassword = false;
+	}
+
 	public void updateProfile() {
 		UsuarioService us = Factories.services.createUsuarioService();
 		success = false;
 		fail = false;
 		if (check(password, repeatPassword)) {
-			us.updateProfile(user, nombre, apellidos, password);
+			user.setNombre(nombre);
+			user.setApellidos(apellidos);
+			if (!password.equals("")) {
+				user.setPasswd(password);
+			}
+			us.updateProfile(user);
 			success = true;
 		} else {
 			fail = true;
 		}
 		password = null;
 		repeatPassword = null;
+	}
+
+	public void newProfile() {
+		UsuarioService us = Factories.services.createUsuarioService();
+		setNewusersuccess(false);
+		setNewuserfail(false);
+		if (checkNew(password, repeatPassword)) {
+			if (checkDidNotExist()) {
+				Usuario user = new Usuario();
+				user.setLogin(login);
+				user.setNombre(nombre);
+				user.setApellidos(apellidos);
+				user.setPasswd(password);
+				user.setRol("Cliente");
+				us.newProfile(user);
+				setNewusersuccess(true);
+			} else {
+				newuserfail = true;
+			}
+		} else {
+			wrongPassword = true;
+		}
+		login = null;
+		password = null;
+		repeatPassword = null;
+	}
+
+	private boolean checkDidNotExist() {
+		UsuarioService us = Factories.services.createUsuarioService();
+		Usuario user = us.find(login);
+		return user == null;
 	}
 
 	private String init(Usuario user) {
@@ -110,6 +157,16 @@ public class BeanSesion implements Serializable {
 			return password.equals(repeatPassword);
 		}
 		return true;
+	}
+
+	private boolean checkNew(String password, String repeatPassword) {
+		if (password.equals("") || repeatPassword.equals("")) {
+			return false;
+		}
+		if (!password.equals("") && !repeatPassword.equals("")) {
+			return password.equals(repeatPassword);
+		}
+		return false;
 	}
 
 	public String getPage() {
@@ -176,6 +233,14 @@ public class BeanSesion implements Serializable {
 		this.user = null;
 		this.login = null;
 		this.password = null;
+	}
+
+	public String reset() {
+		ResetService rs = Factories.services.createResetService();
+		rs.reset();
+		BeanUsuarios.init();
+		init(user);
+		return "users";
 	}
 
 	public String getLogin() {
@@ -272,6 +337,22 @@ public class BeanSesion implements Serializable {
 
 	public void setFail() {
 		this.fail = false;
+	}
+
+	public boolean isNewusersuccess() {
+		return newusersuccess;
+	}
+
+	public void setNewusersuccess(boolean newusersuccess) {
+		this.newusersuccess = newusersuccess;
+	}
+
+	public boolean isNewuserfail() {
+		return newuserfail;
+	}
+
+	public void setNewuserfail(boolean newuserfail) {
+		this.newuserfail = newuserfail;
 	}
 
 }

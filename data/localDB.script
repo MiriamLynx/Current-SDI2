@@ -72,7 +72,7 @@ INSERT INTO INFOUSUARIOS VALUES(27,'usuario6','usuario6','usuario6@micorreo.com'
 INSERT INTO USUARIOS VALUES('admin','admin','Administrador','1',1)
 INSERT INTO USUARIOS VALUES('usuario1','usuario1','Cliente','1',22)
 INSERT INTO USUARIOS VALUES('usuario2','usuario2','Cliente','1',23)
-INSERT INTO USUARIOS VALUES('usuario3','usuario3','Cliente','1',24)
+INSERT INTO USUARIOS VALUES('usuario3','usuario3','Cliente','0',24)
 INSERT INTO CONTACTOS VALUES(1,'contacto1@email.com','Contacto1','Contacto1','Calle Falsa 123','Ciudad de contacto1','admin')
 INSERT INTO CONTACTOS VALUES(2,'contacto2@email.com','Contacto2','Contacto2','Calle Falsa 123','Ciudad de contacto2','admin')
 INSERT INTO CONTACTOS VALUES(3,'contacto3@email.com','Contacto3','Contacto3','Calle Falsa 123','Ciudad de contacto3','admin')

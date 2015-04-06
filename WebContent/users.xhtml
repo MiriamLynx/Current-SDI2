@@ -26,6 +26,16 @@
 		</div>
 		<div class="col-md-10">
 			<div class="wrap" id="users">
+				<div id="accordion" class="panel-group"
+					style="margin-bottom: 0px; margin-left: 40px; margin-right: 40px; display: inline-block;">
+					<h:form>
+						<h:inputText type="text" class="form-control search" name="search"
+							id="search" p:placeholder="#{msgs.search}" value="#{users.entry}">
+							<f:ajax event="keyup" execute="@this"
+								render="activated deactivated" listener="#{users.refreshUsers}" />
+						</h:inputText>
+					</h:form>
+				</div>
 				<ul class="list">
 					<h:form id="activated">
 						<h:panelGroup>
@@ -64,11 +74,9 @@
 					</h:form>
 				</ul>
 				<ul class="list">
-					<h:form id="deativated">
+					<h:form id="deactivated">
 						<h:panelGroup>
 							<h:panelGroup rendered="#{not empty users.deactivated}">
-								<br />
-								<br />
 								<h4>#{msgs.deactivated}</h4>
 							</h:panelGroup>
 							<ui:repeat value="#{users.deactivated}" var="entry">

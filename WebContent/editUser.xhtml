@@ -69,7 +69,7 @@
 							style="margin-left: 50px; margin-right: 50px;">
 							<h:form>
 								<h:commandButton value="#{msgs.submit}"
-									action="#{sesion.updateProfile()}" class="btn btn-primary" />
+									actionListener="#{users.updateUser()}" class="btn btn-primary" />
 								<h:link value="#{msgs.cancel}" class="btn btn-primary"
 									outcome="#{sesion.getPage()}" />
 							</h:form>
@@ -77,12 +77,12 @@
 					</div>
 					<h:outputLabel
 						style="color:green;margin-left: 50px; margin-right: 50px;"
-						action="#{sesion.setSuccess()}" value="#{msgs.changed}"
-						rendered="#{sesion.success}" />
+						action="#{users.setSuccess()}" value="#{msgs.changed}"
+						rendered="#{users.success}" />
 					<h:outputLabel
 						style="color:red;margin-left: 50px; margin-right: 50px;"
-						action="#{sesion.setFail()}" value="#{msgs.passwordMismatch}"
-						rendered="#{sesion.fail}" />
+						action="#{users.setFail()}" value="#{msgs.passwordMismatch}"
+						rendered="#{users.fail}" />
 				</h:form>
 			</div>
 		</div>

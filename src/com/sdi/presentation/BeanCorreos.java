@@ -78,11 +78,13 @@ public class BeanCorreos implements Serializable {
 
 	public String saveDraftAction() {
 		saveDraft();
+		setPage();
 		return "mail";
 	}
 
 	public String sendAction() {
 		send();
+		setPage();
 		return "mail";
 	}
 

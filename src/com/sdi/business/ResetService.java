@@ -1,9 +1,5 @@
 package com.sdi.business;
 
-import java.util.List;
-
-import com.sdi.model.Usuario;
-
 /**
  * Este es el interfaz que ofrecer�� cualquier implementaci��n de la clase
  * fachada.
@@ -18,16 +14,7 @@ import com.sdi.model.Usuario;
  * @author alb
  * 
  */
-public interface UsuarioService {
+public interface ResetService {
 
-	Usuario find(String login);
-
-	void updateProfile(Usuario user);
-
-	List<Usuario> getAllActivated();
-
-	List<Usuario> getAllDeactivated();
-
-	void newProfile(Usuario user);
-
+	void reset();
 }

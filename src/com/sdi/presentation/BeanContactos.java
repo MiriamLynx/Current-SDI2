@@ -73,11 +73,7 @@ public class BeanContactos implements Serializable {
 	}
 
 	public String verContactos() {
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.put("PAGE", "contacts");
-		this.contacts = ((Usuario) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("USER"))
-				.getContactos();
+		setContactos();
 		return "contacts";
 	}
 

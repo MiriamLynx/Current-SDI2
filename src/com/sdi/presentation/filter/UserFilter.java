@@ -2,7 +2,6 @@ package com.sdi.presentation.filter;
 
 import java.io.IOException;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -15,38 +14,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//Los import no se incluyen aquí pero sí los verás en eclipse
+import com.sdi.model.Usuario;
+
 /**
- * Servlet Filter implementation class LoginFilter
+ * Servlet Filter implementation class AdminFilter
  */
-@WebFilter(dispatcherTypes = { DispatcherType.REQUEST }, description = "Filtro de seguridad", urlPatterns = { "/restricted/*" }, initParams = { @WebInitParam(name = "LoginParam", value = "/index.xhtml", description = "P?gina de loggeo") })
-public class LoginFilter implements Filter {
-	// Necesitamos acceder a los parámetros de inicialización en
-	// el método doFilter por lo que necesitamos la variable
-	// config que se inicializará en init()
+@WebFilter(urlPatterns = { "/mail.xhtml", "/editDraft.xhtml" }, initParams = {
+		@WebInitParam(name = "Denied", value = "/denied.xhtml"),
+		@WebInitParam(name = "Index", value = "/index.xhtml") })
+public class UserFilter implements Filter {
+
 	FilterConfig config = null;
 
 	/**
 	 * Default constructor.
 	 */
-	public LoginFilter() {
-		// TODO Auto-generated constructor stub
+	public UserFilter() {
+
 	}
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
-	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-		// Iniciamos la variable de instancia config
-		config = fConfig;
 	}
 
 	/**
@@ -63,12 +54,26 @@ public class LoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
-		if (session.getAttribute("USER") == null) {
-			String loginForm = config.getInitParameter("LoginParam");
+		Usuario user = (Usuario) session.getAttribute("USER");
+		if (user == null) {
+			String index = config.getInitParameter("Index");
 			// Si no hay login, redirección al formulario de login
-			res.sendRedirect(req.getContextPath() + loginForm);
+			res.sendRedirect(req.getContextPath() + index);
+			return;
+		} else if (!user.getRol().equals("Cliente")) {
+			String denied = config.getInitParameter("Denied");
+			// Si no hay login, redirección al formulario de login
+			res.sendRedirect(req.getContextPath() + denied);
 			return;
 		}
 		chain.doFilter(request, response);
 	}
+
+	/**
+	 * @see Filter#init(FilterConfig)
+	 */
+	public void init(FilterConfig fConfig) throws ServletException {
+		config = fConfig;
+	}
+
 }

@@ -1,6 +1,7 @@
 package com.sdi.presentation;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -32,6 +33,9 @@ public class BeanUsuarios implements Serializable {
 	private boolean success;
 	private boolean fail;
 
+	// creiterio de busqueda
+	private String entry;
+
 	public static void init() {
 		UsuarioService us = Factories.services.createUsuarioService();
 		activated = us.getAllActivated();
@@ -53,6 +57,74 @@ public class BeanUsuarios implements Serializable {
 		return "";
 	}
 
+	public void updateUser() {
+		UsuarioService us = Factories.services.createUsuarioService();
+		Usuario editando = us.find(getLogin(email));
+		success = false;
+		fail = false;
+		if (check(currentPassword, password, repeatPassword, editando)) {
+			editando.setNombre(nombre);
+			editando.setApellidos(apellidos);
+			if (!password.equals("")) {
+				editando.setPasswd(password);
+			}
+			editando.setActivo(activo);
+			success = true;
+			us.updateProfile(editando);
+		} else {
+			fail = true;
+		}
+		init();
+		currentPassword = null;
+		password = null;
+		repeatPassword = null;
+	}
+
+	public void refreshUsers() {
+		init();
+		List<Usuario> filter = new ArrayList<Usuario>();
+		for (int i = 0; i < activated.size(); i++) {
+			if (!(activated.get(i).getNombre().contains(entry))
+					&& !(activated.get(i).getApellidos().contains(entry))
+					&& !(activated.get(i).getEmail().contains(entry))) {
+				filter.add(activated.get(i));
+			}
+		}
+		for (Usuario u : filter) {
+			activated.remove(u);
+		}
+		for (int i = 0; i < deactivated.size(); i++) {
+			if (!(deactivated.get(i).getNombre().contains(entry))
+					&& !(deactivated.get(i).getApellidos().contains(entry))
+					&& !(deactivated.get(i).getEmail().contains(entry))) {
+				filter.add(deactivated.get(i));
+			}
+		}
+		for (Usuario u : filter) {
+			deactivated.remove(u);
+		}
+	}
+
+	private String getLogin(String mail) {
+		String[] split = mail.split("@");
+		return split[0];
+	}
+
+	private boolean check(String currentPassword, String password,
+			String repeatPassword, Usuario editando) {
+		if (password.equals("") && repeatPassword.equals("")
+				&& currentPassword.equals("")) {
+			return true;
+		} else if (password.equals("") || repeatPassword.equals("")
+				|| currentPassword.equals("")) {
+			return false;
+		} else if (password.equals(repeatPassword)
+				&& currentPassword.equals(editando.getPasswd())) {
+			return true;
+		}
+		return false;
+	}
+
 	private Usuario find(Integer id) {
 		for (Usuario u : activated) {
 			if (u.getId() == id) {
@@ -65,10 +137,6 @@ public class BeanUsuarios implements Serializable {
 			}
 		}
 		return null;
-	}
-
-	public void activate() {
-
 	}
 
 	public void setUsers() {
@@ -160,6 +228,14 @@ public class BeanUsuarios implements Serializable {
 
 	public void setFail() {
 		this.fail = false;
+	}
+
+	public String getEntry() {
+		return entry;
+	}
+
+	public void setEntry(String entry) {
+		this.entry = entry;
 	}
 
 }

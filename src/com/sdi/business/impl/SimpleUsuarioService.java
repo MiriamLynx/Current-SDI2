@@ -3,9 +3,10 @@ package com.sdi.business.impl;
 import java.util.List;
 
 import com.sdi.business.UsuarioService;
+import com.sdi.business.impl.classes.usuario.AddUser;
+import com.sdi.business.impl.classes.usuario.FindAllActivated;
 import com.sdi.business.impl.classes.usuario.FindAllDeactivated;
 import com.sdi.business.impl.classes.usuario.FindByLogin;
-import com.sdi.business.impl.classes.usuario.FindAllActivated;
 import com.sdi.business.impl.classes.usuario.Update;
 import com.sdi.model.Usuario;
 
@@ -17,9 +18,8 @@ public class SimpleUsuarioService implements UsuarioService {
 	}
 
 	@Override
-	public void updateProfile(Usuario user, String nombre, String apellidos,
-			String password) {
-		new Update().update(user, nombre, apellidos, password);
+	public void updateProfile(Usuario user) {
+		new Update().update(user);
 	}
 
 	@Override
@@ -30,5 +30,10 @@ public class SimpleUsuarioService implements UsuarioService {
 	@Override
 	public List<Usuario> getAllDeactivated() {
 		return new FindAllDeactivated().findDeactivated();
+	}
+
+	@Override
+	public void newProfile(Usuario user) {
+		new AddUser().add(user);
 	}
 }

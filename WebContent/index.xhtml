@@ -9,15 +9,20 @@
 			<h1 class="">#{msgs.welcome}</h1>
 			<button class="btn btn-primary btn-md" data-toggle="modal"
 				data-target="#loginModal">#{msgs.signin}</button>
-			<h:button value="#{msgs.signup}" class="btn btn-primary btn-md" />
+			<button class="btn btn-primary btn-md" data-toggle="modal"
+				data-target="#userModal">#{msgs.signup}</button>
 		</div>
 		<div class="container-head" align="center">
-			<h:outputLabel style="color:red;" value="#{msgs.deactivated}"
-				rendered="#{sesion.deactivated}" />
-			<h:outputLabel style="color:red;" value="#{msgs.wrongPassword}"
-				rendered="#{sesion.wrongPassword}" />
-			<h:outputLabel style="color:red;" value="#{msgs.notFound}"
-				rendered="#{sesion.notFound}" />
+			<h:outputLabel action="#{sesion.setFalse()}" style="color:red;"
+				value="#{msgs.deactivatedAccount}" rendered="#{sesion.deactivated}" />
+			<h:outputLabel action="#{sesion.setFalse()}" style="color:red;"
+				value="#{msgs.wrongPassword}" rendered="#{sesion.wrongPassword}" />
+			<h:outputLabel action="#{sesion.setFalse()}" style="color:red;"
+				value="#{msgs.notFound}" rendered="#{sesion.notFound}" />
+			<h:outputLabel action="#{sesion.setFalse()}" style="color:green;"
+				value="#{msgs.newusersuccess}" rendered="#{sesion.newusersuccess}" />
+			<h:outputLabel action="#{sesion.setFalse()}" style="color:red;"
+				value="#{msgs.newuserfail}" rendered="#{sesion.newuserfail}" />
 		</div>
 		<div class="container-features" align="center">
 			<div class="container-image">
@@ -37,5 +42,6 @@
 			</div>
 		</div>
 		<ui:include src="snippets/loginModal.xhtml" />
+		<ui:include src="snippets/userModal.xhtml" />
 	</ui:define>
 </ui:composition>

@@ -1,0 +1,95 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	<!-- Send Modal -->
+	<div class="modal fade" id="userModal" tabindex="-1"
+		style="opacity: 0.9;">
+		<div class="card card-container">
+			<h:form>
+				<h4
+					style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px;">#{msgs.newUser}</h4>
+				<h:inputText
+					style="max-width:250px; margin-left:50px; margin-right:50px;"
+					type="text" required="true" requiredMessage="#{msgs.required}"
+					name="login" id="login" class="form-control input-sm chat-input"
+					value="#{sesion.login}" p:placeholder="username" />
+				<br class="" />
+				<h:inputText type="text" required="true"
+					style="max-width:250px; margin-left:50px; margin-right:50px;"
+					requiredMessage="#{msgs.required}" name="name"
+					class="form-control input-sm chat-input" value="#{sesion.nombre}" />
+				<br />
+
+				<h:inputText type="text" required="true"
+					style="max-width:250px; margin-left:50px; margin-right:50px;"
+					requiredMessage="#{msgs.required}" name="surname"
+					class="form-control input-sm chat-input"
+					value="#{sesion.apellidos}" />
+				<br />
+				<div id="accordion" class="panel-group"
+					style="max-width: 250px; margin-left: 50px; margin-right: 50px;">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion"
+									href="#collapseOne">#{msgs.password}</a>
+							</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse">
+							<div class="panel-body">
+								<h:inputSecret type="password" name="password"
+									class="form-control input-sm chat-input"
+									p:placeholder="password" value="#{sesion.password}" />
+								<br />
+								<h:inputSecret type="password" name="repeatpassword"
+									class="form-control input-sm chat-input"
+									p:placeholder="repeat password"
+									value="#{sesion.repeatPassword}" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<br />
+				<div class="wrapper" style="display: inline-block;">
+					<div class="modal-footer"
+						style="margin-left: 50px; margin-right: 50px;">
+						<h:form>
+							<h:commandButton value="#{msgs.submit}"
+								action="#{sesion.newProfile()}" class="btn btn-primary" />
+							<h:link value="#{msgs.cancel}" class="btn btn-primary"
+								outcome="home" />
+						</h:form>
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</div>
+	<link rel="stylesheet" type="text/css"
+		href="https://select2.github.io/select2/select2-3.4.1/select2.css" />
+	<link rel="stylesheet" type="text/css"
+		href="https://select2.github.io/select2/select2-3.4.1/select2.css" />
+	<link rel="stylesheet" type="text/css"
+		href="https://raw.githubusercontent.com/t0m/select2-bootstrap-css/bootstrap3/select2-bootstrap.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="https://select2.github.io/select2/select2-3.4.1/select2.js"></script>
+	<script>
+		$('.select2').select2({
+			placeholder : ''
+		});
+
+		$('.select2-remote').select2({
+			data : [ {
+				id : 'A',
+				text : 'A'
+			} ]
+		});
+
+		$('button[data-select2-open]').click(function() {
+			$('#' + $(this).data('select2-open')).select2('open');
+		});
+	</script>
+</ui:composition>

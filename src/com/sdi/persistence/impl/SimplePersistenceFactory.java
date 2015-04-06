@@ -4,14 +4,15 @@ import com.sdi.persistence.ContactoDao;
 import com.sdi.persistence.CorreoDao;
 import com.sdi.persistence.DestinatarioDao;
 import com.sdi.persistence.PersistenceFactory;
+import com.sdi.persistence.ResetDao;
 import com.sdi.persistence.UsuarioDao;
 
 /**
- * Implementaci??????n de la factoria que devuelve implementaci??????n de la capa
- * de persistencia con Jdbc 
+ * Implementaci??????n de la factoria que devuelve implementaci??????n de la
+ * capa de persistencia con Jdbc
  * 
  * @author Enrique
- *
+ * 
  */
 public class SimplePersistenceFactory implements PersistenceFactory {
 
@@ -24,16 +25,20 @@ public class SimplePersistenceFactory implements PersistenceFactory {
 	public CorreoDao createCorreoDao() {
 		return new CorreoJdbcDao();
 	}
-	
+
 	@Override
 	public ContactoDao createContactoDao() {
 		return new ContactoJdbcDao();
 	}
-	
+
 	@Override
 	public DestinatarioDao createDestinatarioDao() {
 		return new DestinatarioJdbcDao();
 	}
-	
+
+	@Override
+	public ResetDao createResetDao() {
+		return new ResetJdbcDao();
+	}
 
 }
