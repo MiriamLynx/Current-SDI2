@@ -31,14 +31,14 @@
 						</h:selectManyListbox>
 						<br /> <br />
 						<h:outputLabel>#{msgs.subject}</h:outputLabel>
-						<h:inputText value="#{mail.subject}" required="true"
-							requiredMessage="#{msgs.required}" type="text" name="subject"
+						<h:inputText value="#{mail.subject}" p:required="true"
+							p:requiredMessage="#{msgs.required}" type="text" name="subject"
 							class="form-control input-sm chat-input"
 							p:placeholder="#{msgs.subject}"></h:inputText>
 						<br />
 						<h:outputLabel>#{msgs.body}</h:outputLabel>
-						<h:inputTextarea value="#{mail.body}" required="true"
-							requiredMessage="#{msgs.required}" name="body"
+						<h:inputTextarea value="#{mail.body}" p:required="true"
+							p:requiredMessage="#{msgs.required}" name="body"
 							class="form-control"></h:inputTextarea>
 					</div>
 					<div class="modal-footer"

@@ -25,15 +25,17 @@
 				<h:form>
 					<h4
 						style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px;">#{msgs.changes}</h4>
-					<h:inputText type="text" required="true"
+					<h:inputText type="text" p:required="true"
 						style="max-width:250px; margin-left:50px; margin-right:50px;"
-						requiredMessage="#{msgs.required}" name="name"
+						p:requiredMessage="#{msgs.required}" name="name"
+						p:placeholder="#{msgs.name}"
 						class="form-control input-sm chat-input" value="#{sesion.nombre}" />
 					<br />
 
-					<h:inputText type="text" required="true"
+					<h:inputText type="text" p:required="true"
 						style="max-width:250px; margin-left:50px; margin-right:50px;"
-						requiredMessage="#{msgs.required}" name="surname"
+						p:requiredMessage="#{msgs.required}" name="surname"
+						p:placeholder="#{msgs.surname}"
 						class="form-control input-sm chat-input"
 						value="#{sesion.apellidos}" />
 					<br />
@@ -56,11 +58,11 @@
 								<div class="panel-body">
 									<h:inputSecret type="password" name="password"
 										class="form-control input-sm chat-input"
-										p:placeholder="password" value="#{sesion.password}" />
+										p:placeholder="#{msgs.password}" value="#{sesion.password}" />
 									<br />
 									<h:inputSecret type="password" name="repeatpassword"
 										class="form-control input-sm chat-input"
-										p:placeholder="repeat password"
+										p:placeholder="#{msgs.repeatpassword}"
 										value="#{sesion.repeatPassword}" />
 								</div>
 							</div>

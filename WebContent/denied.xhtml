@@ -3,15 +3,19 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/template-general.xhtml">
-	<ui:define name="titulo">
-    #{msgs.tituloOperacionError}
-</ui:define>
+	<ui:define name="option">
+		<li><h:commandLink value="#{msgs.signout}" action="#{sesion.end}" /></li>
+	</ui:define>
 
 	<ui:define name="cuerpo">
-		<h:form id="form-principal">
-			<h1>Oh no!</h1>
-			<p>You shall not pass!!!</p>
-			<p>:(</p>
-		</h:form>
+		<div class="row">
+			<div class="wrap col-md-offset-4 col-md-4" align="center">
+				<h1>Oh no!</h1>
+				<h4>#{msgs.denied}</h4>
+				<div class="container-image">
+					<img src="img/nope.png" class="img-responsive" />
+				</div>
+			</div>
+		</div>
 	</ui:define>
 </ui:composition>

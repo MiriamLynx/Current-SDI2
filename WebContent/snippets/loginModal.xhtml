@@ -15,15 +15,15 @@
 				</div>
 				<div class="modal-body">
 					<h:form>
-						<h:inputText type="text" required="true"
-							requiredMessage="#{msgs.required}" name="login" id="login"
+						<h:inputText type="text" p:required="true"
+							p:requiredMessage="#{msgs.required}" name="login" id="login"
 							class="form-control input-sm chat-input" value="#{sesion.login}"
-							p:placeholder="username" />
+							p:placeholder="#{msgs.username}" />
 						<br class="" />
-						<h:inputSecret type="password" required="true"
-							requiredMessage="#{msgs.required}" name="password" id="password"
-							class="form-control input-sm chat-input"
-							value="#{sesion.password}" p:placeholder="password" />
+						<h:inputSecret type="password" p:required="true"
+							p:requiredMessage="#{msgs.required}" name="password"
+							id="password" class="form-control input-sm chat-input"
+							value="#{sesion.password}" p:placeholder="#{msgs.password}" />
 						<br class="" />
 						<br class="" />
 						<div class="wrapper">

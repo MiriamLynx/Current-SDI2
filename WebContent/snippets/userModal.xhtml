@@ -12,19 +12,19 @@
 					style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px;">#{msgs.newUser}</h4>
 				<h:inputText
 					style="max-width:250px; margin-left:50px; margin-right:50px;"
-					type="text" required="true" requiredMessage="#{msgs.required}"
+					type="text" p:required="true" p:requiredMessage="#{msgs.required}"
 					name="login" id="login" class="form-control input-sm chat-input"
 					value="#{sesion.login}" p:placeholder="username" />
 				<br class="" />
-				<h:inputText type="text" required="true"
+				<h:inputText type="text" p:required="true"
 					style="max-width:250px; margin-left:50px; margin-right:50px;"
-					requiredMessage="#{msgs.required}" name="name"
+					p:requiredMessage="#{msgs.required}" name="name"
 					class="form-control input-sm chat-input" value="#{sesion.nombre}" />
 				<br />
 
-				<h:inputText type="text" required="true"
+				<h:inputText type="text" p:required="true"
 					style="max-width:250px; margin-left:50px; margin-right:50px;"
-					requiredMessage="#{msgs.required}" name="surname"
+					p:requiredMessage="#{msgs.required}" name="surname"
 					class="form-control input-sm chat-input"
 					value="#{sesion.apellidos}" />
 				<br />
