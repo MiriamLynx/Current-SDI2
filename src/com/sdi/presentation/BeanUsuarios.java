@@ -27,7 +27,6 @@ public class BeanUsuarios implements Serializable {
 	private String apellidos;
 	private boolean activo;
 	private String email;
-	private String currentPassword;
 	private String password;
 	private String repeatPassword;
 	private boolean success;
@@ -62,7 +61,7 @@ public class BeanUsuarios implements Serializable {
 		Usuario editando = us.find(getLogin(email));
 		success = false;
 		fail = false;
-		if (check(currentPassword, password, repeatPassword, editando)) {
+		if (check(password, repeatPassword)) {
 			editando.setNombre(nombre);
 			editando.setApellidos(apellidos);
 			if (!password.equals("")) {
@@ -75,9 +74,19 @@ public class BeanUsuarios implements Serializable {
 			fail = true;
 		}
 		init();
-		currentPassword = null;
 		password = null;
 		repeatPassword = null;
+	}
+
+	private boolean check(String password, String repeatPassword) {
+		if ((!password.equals("") && repeatPassword.equals(""))
+				|| (password.equals("") && !repeatPassword.equals(""))) {
+			return false;
+		}
+		if (!password.equals("") && !repeatPassword.equals("")) {
+			return password.equals(repeatPassword);
+		}
+		return true;
 	}
 
 	public void refreshUsers() {
@@ -108,21 +117,6 @@ public class BeanUsuarios implements Serializable {
 	private String getLogin(String mail) {
 		String[] split = mail.split("@");
 		return split[0];
-	}
-
-	private boolean check(String currentPassword, String password,
-			String repeatPassword, Usuario editando) {
-		if (password.equals("") && repeatPassword.equals("")
-				&& currentPassword.equals("")) {
-			return true;
-		} else if (password.equals("") || repeatPassword.equals("")
-				|| currentPassword.equals("")) {
-			return false;
-		} else if (password.equals(repeatPassword)
-				&& currentPassword.equals(editando.getPasswd())) {
-			return true;
-		}
-		return false;
 	}
 
 	private Usuario find(Integer id) {
@@ -188,14 +182,6 @@ public class BeanUsuarios implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getCurrentPassword() {
-		return currentPassword;
-	}
-
-	public void setCurrentPassword(String currentPassword) {
-		this.currentPassword = currentPassword;
 	}
 
 	public String getPassword() {

@@ -34,6 +34,7 @@ public class BeanSesion implements Serializable {
 	// perfil
 	private String nombre;
 	private String apellidos;
+	private String currentPassword;
 	private String repeatPassword;
 	private boolean success;
 	private boolean fail;
@@ -62,7 +63,7 @@ public class BeanSesion implements Serializable {
 		UsuarioService us = Factories.services.createUsuarioService();
 		success = false;
 		fail = false;
-		if (check(password, repeatPassword)) {
+		if (check(currentPassword, password, repeatPassword, user)) {
 			user.setNombre(nombre);
 			user.setApellidos(apellidos);
 			if (!password.equals("")) {
@@ -73,6 +74,7 @@ public class BeanSesion implements Serializable {
 		} else {
 			fail = true;
 		}
+		currentPassword = null;
 		password = null;
 		repeatPassword = null;
 	}
@@ -100,6 +102,21 @@ public class BeanSesion implements Serializable {
 		login = null;
 		password = null;
 		repeatPassword = null;
+	}
+
+	private boolean check(String currentPassword, String password,
+			String repeatPassword, Usuario editando) {
+		if (password.equals("") && repeatPassword.equals("")
+				&& currentPassword.equals("")) {
+			return true;
+		} else if (password.equals("") || repeatPassword.equals("")
+				|| currentPassword.equals("")) {
+			return false;
+		} else if (password.equals(repeatPassword)
+				&& currentPassword.equals(editando.getPasswd())) {
+			return true;
+		}
+		return false;
 	}
 
 	private boolean checkDidNotExist() {
@@ -146,17 +163,6 @@ public class BeanSesion implements Serializable {
 		} else {
 			return true;
 		}
-	}
-
-	private boolean check(String password, String repeatPassword) {
-		if ((!password.equals("") && repeatPassword.equals(""))
-				|| (password.equals("") && !repeatPassword.equals(""))) {
-			return false;
-		}
-		if (!password.equals("") && !repeatPassword.equals("")) {
-			return password.equals(repeatPassword);
-		}
-		return true;
 	}
 
 	private boolean checkNew(String password, String repeatPassword) {
@@ -353,6 +359,14 @@ public class BeanSesion implements Serializable {
 
 	public void setNewuserfail(boolean newuserfail) {
 		this.newuserfail = newuserfail;
+	}
+
+	public String getCurrentPassword() {
+		return currentPassword;
+	}
+
+	public void setCurrentPassword(String currentPassword) {
+		this.currentPassword = currentPassword;
 	}
 
 }

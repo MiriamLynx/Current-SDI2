@@ -58,6 +58,11 @@
 								<div class="panel-body">
 									<h:inputSecret type="password" name="password"
 										class="form-control input-sm chat-input"
+										p:placeholder="#{msgs.currentpassword}"
+										value="#{users.currentPassword}" />
+									<br />
+									<h:inputSecret type="password" name="password"
+										class="form-control input-sm chat-input"
 										p:placeholder="#{msgs.password}" value="#{sesion.password}" />
 									<br />
 									<h:inputSecret type="password" name="repeatpassword"
